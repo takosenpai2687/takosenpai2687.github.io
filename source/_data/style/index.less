@@ -1,0 +1,73 @@
+// Fix Sizes
+:root.dart,
+:root {
+    .trm-top-bar {
+        .trm-logo-frame.trm-anima-link>img {
+            width: 116px !important;
+            transition: width .2s ease-out;
+
+            &:hover {
+                filter: drop-shadow(0 0 5px #bbb; );
+                -webkit-filter: drop-shadow(0 0 5px #bbb; );
+                width: 120px !important;
+            }
+        }
+    }
+
+    .trm-menu nav ul li a {
+        font-size: 14px !important;
+    }
+
+    #page-sidebar {
+
+        .trm-mc-header h5.trm-name {
+            font-size: 24px !important;
+        }
+
+        .trm-social a i {
+            font-size: 36px !important;
+        }
+
+        ul.trm-table li {
+            justify-content: space-between !important;
+            gap: 0 !important;
+            width: 90% !important;
+            margin: 0 auto;
+
+            .trm-label:first-child {
+                font-size: 15px !important;
+            }
+
+            .trm-label:last-child {
+                font-size: 13px !important;
+                padding-left: 10px;
+            }
+
+            .trm-label {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: flex-start !important;
+                letter-spacing: 2px !important;
+                text-transform: none !important;
+                font-weight: 400 !important;
+            }
+        }
+    }
+
+
+    // 文章标题 
+
+    .trm-blog-card .trm-card-descr h5 a {
+        white-space: normal !important;
+    }
+
+    .trm-blog-card {
+        height: 95% !important;
+    }
+
+    // 目录下划线去除
+    .post-toc ol .toc-item.active>.toc-link {
+        text-decoration: none !important;
+    }
+
+}

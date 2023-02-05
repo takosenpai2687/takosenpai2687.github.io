@@ -1,0 +1,153 @@
+# 主题
+theme:
+    switch: true
+    default: style-light
+
+# 图标
+favicon:
+    logo: /img/logo-black.png
+    hidden: /img/tako.png?v=1
+    icon16: /img/tako.png?v=1
+    icon32: /img/tako.png?v=1
+
+# 用户信息
+user:
+    name: Tako Senpai
+    first_name: Tako
+    last_name:
+    email: takosenpai2687@gmail.com
+    domain: https://tako-tako.netlify.app
+    avatar: /img/avatar.jfif
+    describe: Tako Senpai lives here.
+
+# 导航栏
+top_bars:
+    - title: 主页
+      url: /
+    - title: 分类
+      url: /categories/
+      noswup: true
+    - title: 标签
+      url: /tags/
+      noswup: true
+    - title: 归档
+      url: /archives/
+      noswup: true
+    - title: 友链
+      url: /links/
+      noswup: true
+
+# 侧边栏
+sidebar:
+    social: # 社交地址
+        - name: github
+          icon: fab fa-github
+          url: https://github.com/takosenpai2687
+        - name: takotako
+          icon: 🐙
+
+    # 打字动画
+    typedTextPrefix: Student
+    typedText: ["&& Web Developer"]
+
+    # 个人信息
+    info:
+        - key: 📍
+          val: Sydney
+        - key: 🎂
+          val: June 3
+        - key: 🌐
+          val: 中文, English
+        - key: 🏫(UG)
+          val: UNSW
+        - key: 🏫(PG)
+          val: USyd
+
+# 横幅
+banner:
+    index:
+        type: img
+        bgurl: /img/guyun.jpg
+        bannerTitle: El Psy <br> Congroo
+        bannerText:
+        fit: cover
+    archive:
+        type: img
+        bgurl: /img/guyun.jpg
+        bannerTitle: El Psy <br> Congroo
+        bannerText:
+        fit: cover
+    links:
+        type: img
+        bgurl: /img/guyun.jpg
+        bannerTitle: El Psy <br> Congroo
+        bannerText:
+        fit: cover
+    default:
+        type: img
+        bgurl: /img/guyun.jpg
+        bannerTitle: El Psy <br> Congroo
+        bannerText: <body>
+        fit: cover
+
+# 页脚
+footer:
+    powered:
+        enable: true
+
+# 布局
+layout:
+    path: layout
+
+# 文章目录
+toc:
+    enable: true
+    list_number: true
+    max_depth: 3
+    min_depth: 1
+
+# 版权信息
+creative_commons:
+    license: by-nc-sa
+    language: deed.zh
+    post: true
+    clipboard: true
+
+# 分类卡片
+categorie_card:
+    enable: true
+    len: 3
+    list: ["Frontend", "Backend", "Algorithms"]
+
+# 固定按钮块
+rightside:
+    readmode: true
+    aside: true
+
+# 日期格式化
+datetime_foramt:
+    post_card:
+        date: YYYY/MM/DD
+        time: HH:mm
+    post_info:
+        date: YYYY/MM/DD
+        time: HH:mm
+    archive:
+        date: YYYY/MM/DD
+        time: HH:mm
+
+# 代码块
+highlight:
+    theme: true
+    title: default
+    copy: true
+    lang: true
+    code_word_wrap: fasle
+    height_limit: 200 # 超出时，显示折叠按钮
+
+# 友链
+links:
+  - name: Tako Tako
+    url: https://tako-tako.netlify.app/
+    image: https://tako-tako.netlify.app/img/tako.png
+    desc: Tako Senpai 自研自用的游戏常用小工具
