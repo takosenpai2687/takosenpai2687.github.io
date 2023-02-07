@@ -175,7 +175,7 @@ CSS 代码如下：
 
 这部分完整 CSS 代码请参考：
 
-https://github.com/DioMao/genshin_ArtifactsUpgradeSim_vue/blob/master/src/style/stars.css
+https://github.com/takosenpai2687/takosenpai2687.github.io/blob/master/source/static/TeyvatStars/stars.css
 
 接下来让星星 ⭐ 动起来：
 
