@@ -61,11 +61,11 @@ This content should also be served over HTTPS.
 
 例如以下 URL：
 
-`http://some.random.site/some-random-resourec`
+`http://some.random.site/some-random-resoure`
 
 将其替换为
 
-`https://some.random.site/some-random-resourec`
+`https://some.random.site/some-random-resoure`
 
 ### 方案二：请求转发（ 适用于来自第三方且不支持 HTTPS 的资源 ）
 
