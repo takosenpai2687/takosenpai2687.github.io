@@ -67,25 +67,25 @@ sidebar:
 banner:
     index:
         type: img
-        bgurl: /img/guyun.jpg
+        bgurl: /img/sky.png
         bannerTitle: El Psy <br> Congroo
         bannerText:
         fit: cover
     archive:
         type: img
-        bgurl: /img/guyun.jpg
+        bgurl: /img/sky.png
         bannerTitle: El Psy <br> Congroo
         bannerText:
         fit: cover
     links:
         type: img
-        bgurl: /img/guyun.jpg
+        bgurl: /img/sky.png
         bannerTitle: El Psy <br> Congroo
         bannerText:
         fit: cover
     default:
         type: img
-        bgurl: /img/guyun.jpg
+        bgurl: /img/sky.png
         bannerTitle: El Psy <br> Congroo
         bannerText: <body>
         fit: cover
