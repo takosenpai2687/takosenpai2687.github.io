@@ -111,7 +111,7 @@ creative_commons:
     license: by-nc-sa
     language: deed.zh
     post: true
-    clipboard: true
+    clipboard: false
 
 # 分类卡片
 categorie_card:
