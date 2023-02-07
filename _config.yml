@@ -103,6 +103,6 @@ theme: async
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
     type: git
-    repo:
-    branch: master
+    repo: https://github.com/takosenpai2687/takosenpai2687.github.io
+    branch: gh-pages
 
