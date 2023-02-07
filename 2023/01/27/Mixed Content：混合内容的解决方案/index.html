@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="Mixed Content：混合内容的解决方案前言在我开发 TakoTako 的时候，遇到了一个混合内容的错误。有一个功能需要获取一个来自 HTTP 服务器的图片资源，而我的网站使用的是 HTTPS 协议。打开 Chrome 控制台可以看到 Warning 如下： 123Mixed Content: The page at &amp;#x27;&lt;URL&gt;&amp;#x27; was loaded ov">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mixed Content：混合内容的解决方案">
+<meta property="og:url" content="http://example.com/2023/01/27/Mixed%20Content%EF%BC%9A%E6%B7%B7%E5%90%88%E5%86%85%E5%AE%B9%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.html">
+<meta property="og:site_name" content="Tako Bay">
+<meta property="og:description" content="Mixed Content：混合内容的解决方案前言在我开发 TakoTako 的时候，遇到了一个混合内容的错误。有一个功能需要获取一个来自 HTTP 服务器的图片资源，而我的网站使用的是 HTTPS 协议。打开 Chrome 控制台可以看到 Warning 如下： 123Mixed Content: The page at &amp;#x27;&lt;URL&gt;&amp;#x27; was loaded ov">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-01-27T05:11:04.000Z">
+<meta property="article:modified_time" content="2023-02-07T14:15:12.989Z">
+<meta property="article:author" content="Tako Senpai">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="浏览器">
+<meta name="twitter:card" content="summary">
+
+
+<title >Mixed Content：混合内容的解决方案</title>
+
+<!-- Favicon -->
+
+    <link href='/img/tako.png?v=1?v=2.0.0' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/tako.png?v=1?v=2.0.0' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"Tako Senpai","root":"/","typed_text":["&& Web Developer"],"theme_version":"2.0.0","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/logo-black.png","icon16":"/img/tako.png?v=1","icon32":"/img/tako.png?v=1","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/img/tako.png?v=1","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":200},"creative_commons":{"license":"by-nc-sa","language":"deed.zh"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-02-08 01:15:12"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.0" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+ 
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/img/logo-black.png">
+    
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    主页
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a data-no-swup href="/categories/" target="">
+                    分类
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a data-no-swup href="/tags/" target="">
+                    标签
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a data-no-swup href="/archives/" target="">
+                    归档
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a data-no-swup href="/links/" target="">
+                    友链
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/sky.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            Mixed Content：混合内容的解决方案
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2023
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div id="page-sidebar" class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    
+
+<div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
+        <div class="trm-user-tabs" id="sidebar-tabs">
+           <div class="trm-tabs-nav trm-mb-40" id="trm-tabs-nav">
+                <div data-to="tabs-user" class="trm-tabs-nav-item">
+                    <i class="iconfont fas fa-user-alt"></i>
+                </div>
+                <div data-to="tabs-toc" class="trm-tabs-nav-item active">
+                    <i class="iconfont fas fa-th-list"></i>
+                </div>
+           </div>
+            <div name="tabs-user" class="trm-tabs-item">
+                <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/avatar.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        Tako Senpai
+    </h5>
+    
+        <div class="trm-label">
+            Student
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+                <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com/takosenpai2687" title="github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="/" title="takotako" rel="nofollow" target="_blank">
+            <i class="iconfont 🐙"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+                <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                📍:
+            </div>
+            <div class="trm-label trm-label-light">
+                Sydney
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                🎂:
+            </div>
+            <div class="trm-label trm-label-light">
+                June 3
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                🌐:
+            </div>
+            <div class="trm-label trm-label-light">
+                中文, English
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                🏫(UG):
+            </div>
+            <div class="trm-label trm-label-light">
+                UNSW
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                🏫(PG):
+            </div>
+            <div class="trm-label trm-label-light">
+                USyd
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+                
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:takosenpai2687@gmail.com" class="trm-btn">
+            联系我
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+            </div>
+            <div name="tabs-toc" class="trm-tabs-item active">
+                <div class="post-toc">
+    <ol class="toc"><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#Mixed-Content：混合内容的解决方案"  data-scroll-to="#Mixed-Content：混合内容的解决方案"><span class="toc-number">1.</span> <span class="toc-text">Mixed Content：混合内容的解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#前言"  data-scroll-to="#前言"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#什么是-Mixed-Content"  data-scroll-to="#什么是-Mixed-Content"><span class="toc-number">1.2.</span> <span class="toc-text">什么是 Mixed Content</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#Mixed-Content-的类型"  data-scroll-to="#Mixed-Content-的类型"><span class="toc-number">1.3.</span> <span class="toc-text">Mixed Content 的类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#被动-x2F-显示型混合内容"  data-scroll-to="#被动-x2F-显示型混合内容"><span class="toc-number">1.3.1.</span> <span class="toc-text">被动&#x2F;显示型混合内容</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#主动型混合内容"  data-scroll-to="#主动型混合内容"><span class="toc-number">1.3.2.</span> <span class="toc-text">主动型混合内容</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#解决方案"  data-scroll-to="#解决方案"><span class="toc-number">1.4.</span> <span class="toc-text">解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#方案一：直接修改协议（-适用于自己有权管理的资源-）"  data-scroll-to="#方案一：直接修改协议（-适用于自己有权管理的资源-）"><span class="toc-number">1.4.1.</span> <span class="toc-text">方案一：直接修改协议（ 适用于自己有权管理的资源 ）</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#方案二：请求转发（-适用于来自第三方且不支持-HTTPS-的资源-）"  data-scroll-to="#方案二：请求转发（-适用于来自第三方且不支持-HTTPS-的资源-）"><span class="toc-number">1.4.2.</span> <span class="toc-text">方案二：请求转发（ 适用于来自第三方且不支持 HTTPS 的资源 ）</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#参考"  data-scroll-to="#参考"><span class="toc-number">1.5.</span> <span class="toc-text">参考</span></a></li></ol></li></ol>
+</div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div id="page-content" class="col-lg-8">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            2023/01/27
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            16:11
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Tako Senpai
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="Mixed-Content：混合内容的解决方案"><a href="#Mixed-Content：混合内容的解决方案" class="headerlink" title="Mixed Content：混合内容的解决方案"></a>Mixed Content：混合内容的解决方案</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在我开发 <a target="_blank" rel="noopener" href="https://tako-tako.netlify.app/">TakoTako</a> 的时候，遇到了一个混合内容的错误。有一个功能需要获取一个来自 <strong>HTTP</strong> 服务器的图片资源，而我的网站使用的是 <strong>HTTPS</strong> 协议。打开 Chrome 控制台可以看到 <code>Warning</code> 如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Mixed Content: The page at &#x27;&lt;URL&gt;&#x27; was loaded over HTTPS,</span><br><span class="line">but requested an insecure image &#x27;&lt;URL&gt;&#x27;.</span><br><span class="line">This content should also be served over HTTPS.</span><br></pre></td></tr></table></figure>
+
+<h2 id="什么是-Mixed-Content"><a href="#什么是-Mixed-Content" class="headerlink" title="什么是 Mixed Content"></a>什么是 Mixed Content</h2><p>对混合内容的保护来自于浏览器的安全策略。当用户以 <strong>HTTPS</strong> 访问一个页面时，他们与服务器的连接会以 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/TLS">TLS</a> 加密。这样做可以有效防止窃听以及 <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB/1739730?fr=aladdin">中间人攻击</a> 。一个含有 <strong>HTTP</strong> 明文内容的 <strong>HTTPS</strong> 页面被称为 <strong>混合内容（Mixed Content）</strong> 。这样的页面只有部分内容被加密，没有被加密的内容会受到窃听和中间人攻击，不利于页面的安全。</p>
+<h2 id="Mixed-Content-的类型"><a href="#Mixed-Content-的类型" class="headerlink" title="Mixed Content 的类型"></a>Mixed Content 的类型</h2><p>混合内容有两种类型：<strong>被动&#x2F;显示型混合内容（mixed passive&#x2F;display content）</strong> 和 <strong>主动型混合内容（mixed active content）</strong>。两者的不同之处在于受到中间人攻击的威胁程度。</p>
+<h3 id="被动-x2F-显示型混合内容"><a href="#被动-x2F-显示型混合内容" class="headerlink" title="被动&#x2F;显示型混合内容"></a>被动&#x2F;显示型混合内容</h3><p>被动型混合内容指的是包含于 <strong>HTTPS</strong> 中的静态 <strong>HTTP</strong> 内容。这些内容无法对页面上的其它内容进行更改，因此威胁程度相对较低。会被视为被动型混合内容的 HTTP 请求有：</p>
+<ul>
+<li><code>&lt;img&gt;</code></li>
+<li><code>&lt;audio&gt;</code></li>
+<li><code>&lt;video&gt;</code></li>
+<li><code>&lt;object&gt;</code></li>
+</ul>
+<h3 id="主动型混合内容"><a href="#主动型混合内容" class="headerlink" title="主动型混合内容"></a>主动型混合内容</h3><p>主动型混合内容指的是有权访问其余的 <strong>HTTPS</strong> 页面的内容。这种混合内容可以改变页面的行为，窃取用户信息，因此威胁更大。 会被视为主动型混合内容的 HTTP 请求有：</p>
+<ul>
+<li><code>&lt;script&gt;</code></li>
+<li><code>&lt;link&gt;</code></li>
+<li><code>&lt;iframe&gt;</code></li>
+<li><code>&lt;XMLHttpRequest&gt;</code></li>
+<li><code>fetch()</code></li>
+<li>所有用到 <code>url</code> 的 CSS 值（ <code>@font-face</code>, <code>cursor</code>, <code>background-image</code> 等 ）</li>
+</ul>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>基于上面由 MDN 给出的关于安全策略的描述，对混合内容页面的最佳解决方案就是把所有的请求都升级为 <strong>HTTPS</strong> 请求。</p>
+<h3 id="方案一：直接修改协议（-适用于自己有权管理的资源-）"><a href="#方案一：直接修改协议（-适用于自己有权管理的资源-）" class="headerlink" title="方案一：直接修改协议（ 适用于自己有权管理的资源 ）"></a>方案一：直接修改协议（ 适用于自己有权管理的资源 ）</h3><p>如果有对请求资源的管理权，直接在后端把资源请求接口的协议改为 HTTPS。然后前端只需要改一下 URL 即可。</p>
+<p>例如以下 URL：</p>
+<p><code>http://some.random.site/some-random-resoure</code></p>
+<p>将其替换为</p>
+<p><code>https://some.random.site/some-random-resoure</code></p>
+<h3 id="方案二：请求转发（-适用于来自第三方且不支持-HTTPS-的资源-）"><a href="#方案二：请求转发（-适用于来自第三方且不支持-HTTPS-的资源-）" class="headerlink" title="方案二：请求转发（ 适用于来自第三方且不支持 HTTPS 的资源 ）"></a>方案二：请求转发（ 适用于来自第三方且不支持 HTTPS 的资源 ）</h3><p>来自第三方的资源如果不支持 HTTPS 协议，这时候就需要后端进行请求转发了。</p>
+<p>在我的 <strong>TakoTako</strong> 中，使用了 Netlify 云函数进行了请求转发。将 <strong>HTTP</strong> 的请求任务交给后端，将返回的结果经由 <strong>HTTPS</strong> 转发回前端。云函数的部分代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> fetch <span class="keyword">from</span> <span class="string">&quot;node-fetch&quot;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> handler = <span class="keyword">async</span> <span class="keyword">function</span> (<span class="params">event, context</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> &#123; url &#125; = event.<span class="property">queryStringParameters</span>;</span><br><span class="line">    <span class="comment">// Fetch Image</span></span><br><span class="line">    <span class="keyword">let</span> image;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> result = <span class="keyword">await</span> <span class="title function_">fetch</span>(url);</span><br><span class="line">        image = <span class="keyword">await</span> result.<span class="title function_">buffer</span>();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;error&quot;</span>, error);</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">statusCode</span>: <span class="number">500</span>,</span><br><span class="line">            <span class="attr">body</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">                <span class="attr">error</span>: error.<span class="property">message</span>,</span><br><span class="line">            &#125;),</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">statusCode</span>: <span class="number">200</span>,</span><br><span class="line">        <span class="attr">headers</span>: &#123;</span><br><span class="line">            <span class="string">&quot;Content-type&quot;</span>: <span class="string">&quot;image/jpeg&quot;</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">body</span>: image.<span class="title function_">toString</span>(<span class="string">&quot;base64&quot;</span>),</span><br><span class="line">        <span class="attr">isBase64Encoded</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>可以看到，前端将 URL 写进了请求的查询参数里。后端在拿到 URL 之后，对请求的 URL 进行了一次 Fetch。得到的图片资源转换为 base64 字符串，返回给前端。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/Security/Mixed_content">MDN：混合内容</a></p>
+<p><a target="_blank" rel="noopener" href="https://outspokenmedia.com/https/mixed-content/">封面图片来源</a></p>
+
+</article>
+    
+    
+
+<ul class="trm-post-copyright">
+    <li class="trm-post-copyright-author">
+        <strong>本文作者：</strong>
+        Tako Senpai
+    </li>
+    <li class="trm-post-copyright-link">
+        <strong>本文链接：</strong>
+        <a id="original-link" href="http://example.com/2023/01/27/Mixed%20Content%EF%BC%9A%E6%B7%B7%E5%90%88%E5%86%85%E5%AE%B9%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="Mixed Content：混合内容的解决方案">http://example.com/2023/01/27/Mixed%20Content%EF%BC%9A%E6%B7%B7%E5%90%88%E5%86%85%E5%AE%B9%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</a>
+    </li>
+    <li class="trm-post-copyright-license">
+        <strong>版权声明：</strong>
+        本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 ">CC BY-NC-SA 4.0</a> 许可协议。
+    </li>
+</ul>
+
+</div>
+<div id="post-next-prev" class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/02/05/WebAPI%EF%BC%9A%E4%BD%BF%E7%94%A8-MutationObserver-%E7%9B%91%E5%90%AC-DOM-%E5%8F%98%E5%8C%96/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/static/MutationObserver/cover.png">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%89%8D%E7%AB%AF/">
+                    前端
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/02/05/WebAPI%EF%BC%9A%E4%BD%BF%E7%94%A8-MutationObserver-%E7%9B%91%E5%90%AC-DOM-%E5%8F%98%E5%8C%96/" class="trm-anima-link">
+                    WebAPI：使用 MutationObserver 监听 DOM 变化
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>2023/02/05</li>
+                <li>17:54</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.3.0
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                主题 - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v2.0.0
+            </span>
+        </div>
+      
+
+     
+
+     
+</footer>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="单栏和双栏切换" onclick="asyncFun.switchSingleColumn()">
+            <i class="iconfont fas fa-arrows-alt-h"></i>
+        </div>
+    
+</div>
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  <div id="trm-back-top" class="trm-back-top" data-title="回到顶部">
+    <i class="iconfont fas fa-arrow-up"></i>
+</div>
+  
+  <!-- Plugin -->
+
+
+
+
+    
+    
+<script src="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.0.0"></script>
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.0.0"></script>
+
+</body>
+
+</html>
