@@ -3611,6 +3611,12 @@ pre .coffeescript .title {
 :root .trm-publication li {
   color: var(--theme-color, #00283a) !important;
 }
+:root.dart .trm-banner img,
+:root .trm-banner img {
+  object-position: center bottom !important;
+  filter: saturate(1.3);
+  -webkit-filter: saturate(1.3);
+}
 @media (min-width: 1200px) and (max-width: 1440px) {
   .container {
     max-width: 1140px !important;
