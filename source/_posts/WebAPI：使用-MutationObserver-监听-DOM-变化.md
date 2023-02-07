@@ -1,5 +1,5 @@
 ---
-title: WebAPI：使用 MutationObserver 来监听 DOM 变化
+title: WebAPI：使用 MutationObserver 监听 DOM 变化
 date: 2023-02-05 17:54:04
 tags:
     - 前端
@@ -7,11 +7,11 @@ tags:
     - Web API
 categories:
     - 前端
-cover: [img/posts/MutationObserver/cover.png]
+cover: [static/MutationObserver/cover.png]
 author: Tako Senpai
 ---
 
-# WebAPI：使用 MutationObserver 来监听 DOM 变化
+# WebAPI：使用 MutationObserver 监听 DOM 变化
 
 ## 前言
 
@@ -123,3 +123,9 @@ window.onload = init;
 ```
 
 可以看到，对于所有变化的节点，我们只关注标签名为`TABLE`的节点的变化。这里因为要监听`innerText`，所以我们在选项里加上了`characterData`。
+
+## 参考
+
+[MDN：MutationObserver](https://developer.mozilla.org/zh-CN/docs/Web/API/MutationObserver)
+
+[封面图片来源](https://shuvohabib.medium.com/listening-to-dom-changes-by-javascript-web-api-mutation-observer-hint-its-the-best-practice-3ee92dc8aac6)

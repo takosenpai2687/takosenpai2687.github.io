@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div
+            class="stars-container stars-bg"
+            data-v-aae68cc2=""
+            data-v-3be04d1a=""
+        >
+            <div class="stars-box" data-v-aae68cc2="">
+                <div id="stars" data-v-aae68cc2=""></div>
+                <div id="stars2" data-v-aae68cc2=""></div>
+                <div id="stars3" data-v-aae68cc2=""></div>
+            </div>
+            <div class="fog" data-v-aae68cc2=""></div>
+            <div class="horizon" data-v-aae68cc2=""></div>
+        </div>
+    </body>
+    <link rel="stylesheet" href="stars.css" />
+    <style>
+        html,
+        body,
+        .stars-container {
+            height: 100%;
+            margin: 0;
+        }
+        .stars-container {
+            background-image: linear-gradient(180deg, #703519, #7d5326);
+            animation: stars-bg-change 12s linear infinite;
+        }
+
+        .stars-container div {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        @keyframes stars-bg-change {
+            0% {
+                filter: hue-rotate(0deg) brightness(0.8);
+                -webkit-filter: hue-rotate(0deg) brightness(0.8);
+            }
+
+            50% {
+                filter: hue-rotate(180deg) brightness(0.8);
+                -webkit-filter: hue-rotate(180deg) brightness(0.8);
+            }
+
+            50% {
+                filter: hue-rotate(360deg) brightness(0.8);
+                -webkit-filter: hue-rotate(360deg) brightness(0.8);
+            }
+        }
+
+        /* 地平线 */
+        .horizon {
+            background-image: linear-gradient(
+                0,
+                rgba(0, 0, 0, 0),
+                rgba(255, 255, 255, 0.6),
+                rgba(0, 0, 0, 0)
+            );
+            opacity: 0.3;
+            height: 30% !important;
+            left: 0;
+            bottom: 5rem;
+        }
+
+        /* 雾气 */
+        .fog {
+            background-image: url(fog.png);
+            background-size: 125rem 75rem;
+            animation: fog-move 90s linear infinite;
+            opacity: 0.6;
+            top: 0;
+            left: 0;
+        }
+
+        @keyframes fog-move {
+            0% {
+                background-position-x: 0;
+            }
+
+            100% {
+                background-position-x: 125rem;
+            }
+        }
+    </style>
+</html>

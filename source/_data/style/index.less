@@ -70,4 +70,19 @@
         text-decoration: none !important;
     }
 
+    // 正文字体颜色统一
+    .trm-publication {
+
+        p,
+        li {
+            color: var(--theme-color, #00283a) !important;
+        }
+    }
+}
+
+// 增加内容宽度(from: 1140px)
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1440px !important;
+    }
 }
