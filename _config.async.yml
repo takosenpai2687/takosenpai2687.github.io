@@ -24,14 +24,14 @@ user:
 top_bars:
     - title: 主页
       url: /
+    - title: 归档
+      url: /archives/
+      noswup: true
     - title: 分类
       url: /categories/
       noswup: true
     - title: 标签
       url: /tags/
-      noswup: true
-    - title: 归档
-      url: /archives/
       noswup: true
     - title: 友链
       url: /links/
