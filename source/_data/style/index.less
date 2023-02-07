@@ -80,8 +80,14 @@
     }
 }
 
-// 增加内容宽度(from: 1140px)
-@media (min-width: 1200px) {
+// 内容宽度 
+@media (min-width: 1200px) and (max-width: 1440px) {
+    .container {
+        max-width: 1140px !important;
+    }
+}
+
+@media (min-width: 1440) {
     .container {
         max-width: 1440px !important;
     }
