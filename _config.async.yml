@@ -154,7 +154,7 @@ links:
 
 # 统计
 webAnalytics:  
-  enable: false
+  enable: true
   baidu:   
   google: G-RQ3ECBBKBP
   tencent: 
