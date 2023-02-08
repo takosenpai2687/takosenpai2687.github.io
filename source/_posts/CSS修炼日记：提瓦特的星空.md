@@ -29,14 +29,14 @@ author: Tako Senpai
 首先写一下 HTML 结构。
 
 ```HTML
-<div class="stars-container stars-bg" data-v-aae68cc2="" data-v-3be04d1a="">
-    <div class="stars-box" data-v-aae68cc2="">
-        <div id="stars" data-v-aae68cc2=""></div>
-        <div id="stars2" data-v-aae68cc2=""></div>
-        <div id="stars3" data-v-aae68cc2=""></div>
+<div class="stars-container stars-bg" data-v-3be04d1a="">
+    <div class="stars-box">
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
     </div>
-    <div class="fog" data-v-aae68cc2=""></div>
-    <div class="horizon" data-v-aae68cc2=""></div>
+    <div class="fog"></div>
+    <div class="horizon"></div>
 </div>
 ```
 
