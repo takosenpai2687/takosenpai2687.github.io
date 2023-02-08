@@ -29,7 +29,7 @@ author: Tako Senpai
 首先写一下 HTML 结构。
 
 ```HTML
-<div class="stars-container stars-bg" data-v-3be04d1a="">
+<div class="stars-container stars-bg">
     <div class="stars-box">
         <div id="stars"></div>
         <div id="stars2"></div>
