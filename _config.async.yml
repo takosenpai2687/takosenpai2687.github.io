@@ -151,3 +151,12 @@ links:
     url: https://tako-tako.netlify.app/
     image: https://tako-tako.netlify.app/img/tako.png
     desc: Tako Senpai 自研自用的游戏小工具
+
+# 统计
+webAnalytics:  
+  enable: false
+  baidu:   
+  google: G-RQ3ECBBKBP
+  tencent: 
+    sid:
+    cid:
