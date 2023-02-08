@@ -205,6 +205,8 @@ https://github.com/takosenpai2687/takosenpai2687.github.io/blob/master/source/st
 
 ## 参考
 
+[本文完整代码](https://github.com/takosenpai2687/takosenpai2687.github.io/blob/master/source/static/TeyvatStars/index.html)
+
 [TakoTako 原神页](https://tako-tako.netlify.app/genshin)
 
 [原神圣遗物模拟器](https://github.com/DioMao/genshin_ArtifactsUpgradeSim_vue)
