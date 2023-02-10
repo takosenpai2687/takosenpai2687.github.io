@@ -1,5 +1,5 @@
 ---
-title: WebAPI：使用 MutationObserver 监听 DOM 变化
+title: WebAPI：使用 MutationObserver 监听 DOM 变化 🩺
 date: 2023-02-05 17:54:04
 tags:
     - 前端
