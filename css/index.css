@@ -3592,6 +3592,10 @@ pre .coffeescript .title {
 :root .trm-publication li {
   color: var(--theme-color, #00283a) !important;
 }
+:root.dart .post-toc .toc-link,
+:root .post-toc .toc-link {
+  white-space: normal !important;
+}
 :root.dart .trm-banner img,
 :root .trm-banner img {
   object-position: center bottom !important;
