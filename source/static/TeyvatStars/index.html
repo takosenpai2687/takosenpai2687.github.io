@@ -70,20 +70,22 @@
         /* 雾气 */
         .fog {
             background-image: url(fog.png);
-            background-size: 125rem 75rem;
-            animation: fog-move 90s linear infinite;
-            opacity: 0.6;
+            background-size: 150rem 60rem;
+            animation: fog-move 50s linear infinite;
+            opacity: 0.8;
             top: 0;
             left: 0;
         }
 
         @keyframes fog-move {
             0% {
-                background-position-x: 0;
+                background-position-x: 150rem;
+                background-position-x: 90rem;
             }
 
             100% {
-                background-position-x: 125rem;
+                background-position-x: 0;
+                background-position-y: 0;
             }
         }
     </style>

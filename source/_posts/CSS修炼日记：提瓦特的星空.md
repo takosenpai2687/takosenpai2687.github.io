@@ -120,16 +120,16 @@ CSS 部分，首先我们来实现一下最简单的星空颜色背景。
 
 ![](static/TeyvatStars/fog.png)
 
-对 `div.fog` 套用这个背景图片，给它一个相对较小的宽高，让它可以 `repeat` 多一些。
+对 `div.fog` 套用这个背景图片，给它一个差不多的宽高，并且 `repeat`。
 
 CSS 代码如下：
 
 ```SCSS
 .fog {
     background-image: url(fog.png);
-    background-size: 125rem 75rem;
-    animation: fog-move 90s linear infinite;
-    opacity: 0.6;
+    background-size: 150rem 60rem;
+    animation: fog-move 50s linear infinite;
+    opacity: 0.8;
     top: 0;
     left: 0;
 }
@@ -140,11 +140,13 @@ CSS 代码如下：
 ```SCSS
 @keyframes fog-move {
     0% {
-        background-position-x: 0;
+        background-position-x: 150rem;
+        background-position-x: 90rem;
     }
 
     100% {
-        background-position-x: 125rem;
+        background-position-x: 0;
+        background-position-y: 0;
     }
 }
 ```
