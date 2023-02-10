@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Base64</title>
+    </head>
+    <script>
+        function handleUpload() {
+            const input = document.querySelector("input");
+            const preview = document.querySelector("img");
+            let file = input.files;
+            if (file && file[0]) {
+                let reader = new FileReader();
+                reader.onloadend = async (e) => {
+                    let image = e.target.result;
+                    preview.src = image;
+                };
+                reader.readAsDataURL(file[0]);
+            }
+        }
+    </script>
+    <body>
+        <div class="wrapper">
+            <input type="file" accept="image/*" onchange="handleUpload()" />
+            <img id="preview" src="" alt="" />
+        </div>
+    </body>
+
+    <style>
+        html,
+        body,
+        .wrapper {
+            height: 100%;
+        }
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        img {
+            height: 400px;
+        }
+    </style>
+</html>
