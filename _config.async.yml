@@ -26,16 +26,12 @@ top_bars:
       url: /
     - title: 归档
       url: /archives/
-      noswup: true
     - title: 分类
       url: /categories/
-      noswup: true
     - title: 标签
       url: /tags/
-      noswup: true
     - title: 友链
       url: /links/
-      noswup: true
 
 # 侧边栏
 sidebar:
