@@ -3602,13 +3602,39 @@ pre .coffeescript .title {
   filter: saturate(1.3);
   -webkit-filter: saturate(1.3);
 }
+:root.dart .trm-publication a,
+:root .trm-publication a {
+  background: none !important;
+  color: #bfc42b !important;
+  transition: none !important;
+  font-weight: bold !important;
+}
+:root.dart .trm-publication a:hover,
+:root .trm-publication a:hover {
+  color: #dfc62b !important;
+}
 @media (min-width: 1200px) and (max-width: 1440px) {
   .container {
     max-width: 1140px !important;
   }
 }
-@media (min-width: 1440) {
+@media (min-width: 1440px) {
   .container {
     max-width: 1440px !important;
+  }
+}
+@media (min-width: 1281px) {
+  .c-scrollbar {
+    width: 16px !important;
+    top: 4px !important;
+    bottom: 4px !important;
+    height: calc(100vh - 20px);
+  }
+  .c-scrollbar .c-scrollbar_thumb {
+    width: 16px !important;
+    right: 0 !important;
+    border-radius: 10px;
+    background-color: var(--primary, #afb42b);
+    opacity: 1;
   }
 }
