@@ -90,6 +90,17 @@
         filter: saturate(1.3);
         -webkit-filter: saturate(1.3);
     }
+
+    .trm-publication a {
+        background: none !important;
+        color: #bfc42b !important;
+        transition: none !important;
+        font-weight: bold !important;
+
+        &:hover {
+            color: #dfc62b !important;
+        }
+    }
 }
 
 // 内容宽度 
@@ -99,8 +110,27 @@
     }
 }
 
-@media (min-width: 1440) {
+@media (min-width: 1440px) {
     .container {
         max-width: 1440px !important;
+    }
+}
+
+@media (min-width: 1281px) {
+
+    // PC 滚动条
+    .c-scrollbar {
+        width: 16px !important;
+        top: 4px !important;
+        bottom: 4px !important;
+        height: calc(100vh - 20px);
+
+        .c-scrollbar_thumb {
+            width: 16px !important;
+            right: 0 !important;
+            border-radius: 10px;
+            background-color: var(--primary, #afb42b);
+            opacity: 1;
+        }
     }
 }
