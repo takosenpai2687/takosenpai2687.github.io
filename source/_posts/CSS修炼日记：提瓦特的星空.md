@@ -141,7 +141,7 @@ CSS 代码如下：
 @keyframes fog-move {
     0% {
         background-position-x: 150rem;
-        background-position-x: 90rem;
+        background-position-y: 60rem;
     }
 
     100% {
@@ -184,7 +184,7 @@ https://github.com/takosenpai2687/takosenpai2687.github.io/blob/master/source/st
 ```SCSS
 @keyframes animStar {
   from {
-    transform: translateX(0rem);
+    transform: translateX(40rem);
   }
 
   to {
@@ -211,6 +211,6 @@ https://github.com/takosenpai2687/takosenpai2687.github.io/blob/master/source/st
 
 [TakoTako 原神页](https://tako-tako.netlify.app/genshin)
 
-[原神圣遗物模拟器](https://github.com/DioMao/genshin_ArtifactsUpgradeSim_vue)
+[原神圣遗物模拟器（作者：DioMao）](https://github.com/DioMao/genshin_ArtifactsUpgradeSim_vue)
 
-[CSS 星星效果](https://codepen.io/shuangcs/pen/gKbQEj)
+[CSS 星星效果（作者：csshuang）](https://codepen.io/shuangcs/pen/gKbQEj)
