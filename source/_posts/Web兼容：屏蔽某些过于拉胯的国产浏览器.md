@@ -20,9 +20,7 @@ author: Tako Senpai
 
 ## 手机 QQ 内置浏览器
 
-腾讯的浏览器还是比较要脸的，没有篡改 ua。可以直接通过 `useragent` 来识别手机 QQ 内置浏览器。
-
-useragent
+腾讯的浏览器还是比较收敛的，没有篡改 ua。可以直接通过 `useragent` 来识别手机 QQ 内置浏览器。
 
 ```JS
 if (navigator.userAgent.includes("QQ/")) {
