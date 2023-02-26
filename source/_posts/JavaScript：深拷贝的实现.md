@@ -14,7 +14,7 @@ author: Tako Senpai
 
 ## 赋值与浅拷贝
 
-在开发中，我们有时会遇到需要拷贝数据的情况。对于基本数据类型，如 `number`, `string`, `undefined`, `null`, `boolean`, `bigint`等，我们可以直接赋值。而对于 `object` 类对象，如果依然用赋值的方式进行拷贝，则会遇到问题。
+在开发中，我们有时会遇到需要拷贝数据的情况。对于基本数据类型，如 `number`, `string`, `undefined`, `null`, `boolean`, `bigint`等，我们可以直接赋值。而对于 `object` 类对象，如果依然采用赋值的方式进行拷贝，则会遇到问题。
 
 在 JavaScript 中，对象的浅拷贝与其源对象的属性共享相同引用。一言以蔽之，如果属性是基本类型，拷贝的就是基本类型的值，如果属性是引用类型，拷贝的就是内存地址。
 
@@ -25,7 +25,7 @@ let v1 = {x: 1, y: 1};
 let v2 = v1;    // v2 => {x: 1, y: 10}
 v2.x = 2;
 console.log(v2);    // {x: 2, y: 1}
-console.log(v1);    // {x: 2, y: 1}
+console.log(v1);    // {x: 2, y: 1} v1的值也被篡改了
 ```
 
 用赋值的方式进行拷贝时，实际上拷贝的是对象的指针，而指针所指的对象是被共用的内存。这就是浅拷贝。
@@ -198,7 +198,7 @@ function clone(src, map = new Map()) {
 NodeList.prototype.forEach = Array.prototype.forEach;
 const arr = document.querySelectorAll('a');
 for (let k in arr) {
-
+    console.log(k); // ... 会发现有forEach属性
 }
 ```
 
