@@ -44,9 +44,9 @@ console.log(o2.pos);    // {x: 2, y: 1, z: 1}
 
 ### 缺点
 
-1. 无法处理循环引用的情况：如 Map, Set, Date, RegEx 等。
+1. 无法处理循环引用的情况。
 
-2. 不支持 JSON 序列化的属性会丢失，如 Function。
+2. 不支持 JSON 序列化的属性会丢失，如 Function, Map, Set, RegEx 等。
 
 3. Date 对象会变成字符串类型。
 
