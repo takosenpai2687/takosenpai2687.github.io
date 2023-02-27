@@ -169,7 +169,11 @@ function clone(src, map = new Map()) {
 
 ## 手写深拷贝：精装版
 
-青春版的代码解决了循环引用的问题。接下来我们扣一扣细节，做一些性能优化。
+青春版的代码解决了循环引用的问题。但是并没有提供不可序列化的解决方案。
+
+我们可以在初始化的时候，调用源对象的构造函数：`new src.constructor(src)`。这样就支持了 Date, Map, Set 等无法用 JSON 序列化的复杂对象。
+
+另外，我们也可以扣一扣细节，做一些性能优化。
 
 -   使用 `for ... in` 循环并不是最优的选择。可以使用 `Object.keys().forEach` 代替。
 
@@ -180,7 +184,7 @@ function clone(src, map = new Map()) {
 ```JavaScript
 function clone(src, map = new Map()) {
     if (!src || typeof src !== "object") return src;
-    let clonedRes = Array.isArray(src) ? [] : {};
+    let clonedRes = new src.constructor(src);
     if (map.has(src)) return map.get(src);
     map.set(src, clonedRes);
     Object.keys(src).forEach((key) => (clonedRes[key] = clone(src[key], map)));
