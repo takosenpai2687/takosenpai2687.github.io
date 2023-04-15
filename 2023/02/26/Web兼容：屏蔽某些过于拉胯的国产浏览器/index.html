@@ -7,16 +7,24 @@
 <meta name="full-screen" content="yes">
 <meta name="theme-color" content="#317EFB" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Tako Bay">
-<meta property="og:url" content="http://takosenpai2687.github.io/tags/%E5%89%8D%E7%AB%AF/index.html">
+<meta name="description" content="Web 兼容：屏蔽某些过于拉胯的浏览器 ♿前言前一阵子部署了一个网站，主要服务对象是国内用户。有一部分手机用户在通过 QQ 和 百度贴吧 APP 分享了网站的链接后，会用这些 app 内置的简易版浏览器打开我的网站。 这些浏览器因为种种原因，对现有的 WEB 标准进行了阉割，里面的兼容性问题层出不穷：黑色的按钮能显示成白的，背景颜色 rgba、filter 无效等等。想来想去也没有特别好的方案，最">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web兼容：屏蔽某些过于拉胯的浏览器 ♿">
+<meta property="og:url" content="http://takosenpai2687.github.io/2023/02/26/Web%E5%85%BC%E5%AE%B9%EF%BC%9A%E5%B1%8F%E8%94%BD%E6%9F%90%E4%BA%9B%E8%BF%87%E4%BA%8E%E6%8B%89%E8%83%AF%E7%9A%84%E5%9B%BD%E4%BA%A7%E6%B5%8F%E8%A7%88%E5%99%A8/index.html">
 <meta property="og:site_name" content="Tako Bay">
+<meta property="og:description" content="Web 兼容：屏蔽某些过于拉胯的浏览器 ♿前言前一阵子部署了一个网站，主要服务对象是国内用户。有一部分手机用户在通过 QQ 和 百度贴吧 APP 分享了网站的链接后，会用这些 app 内置的简易版浏览器打开我的网站。 这些浏览器因为种种原因，对现有的 WEB 标准进行了阉割，里面的兼容性问题层出不穷：黑色的按钮能显示成白的，背景颜色 rgba、filter 无效等等。想来想去也没有特别好的方案，最">
 <meta property="og:locale">
+<meta property="og:image" content="http://takosenpai2687.github.io/img/404.jpg">
+<meta property="article:published_time" content="2023-02-26T05:23:44.000Z">
+<meta property="article:modified_time" content="2023-02-28T07:53:06.155Z">
 <meta property="article:author" content="Tako Senpai">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="JS">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://takosenpai2687.github.io/img/404.jpg">
 
 
-<title >Tako Bay</title>
+<title >Web兼容：屏蔽某些过于拉胯的浏览器 ♿</title>
 
 <!-- Favicon -->
 
@@ -58,7 +66,7 @@
 
 <!-- Variable -->
 <script>window.ASYNC_CONFIG = {"hostname":"takosenpai2687.github.io","author":"Tako Senpai","root":"/","typed_text":["&& Web Developer"],"theme_version":"2.0.0","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/logo-black.png","icon16":"/img/tako.png?v=1","icon32":"/img/tako.png?v=1","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/img/tako.png?v=1","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":200}};</script>
-<script id="async-page-config">window.PAGE_CONFIG = {"isPost":false,"isHome":false,"postUpdate":"2023-04-15 17:37:28"};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-02-28 18:53:06"};</script>
 
 <!-- Theme mode css -->
 <link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.0" id="trm-switch-style">
@@ -217,7 +225,8 @@
             <!-- top bar end -->
 
             <!-- body -->
-            <div class="trm-content-start">
+            
+<div class="trm-content-start">
     <!-- banner -->
     <div class="trm-banner" data-scroll data-scroll-direction="vertical">
     
@@ -238,10 +247,10 @@
                     <!-- banner title -->
                     <div class="trm-banner-text ">
                         <div class="trm-label trm-mb-20">
-                            
+                            NEWS LETTER
                         </div>
                         <h1 class="trm-mb-30 trm-hsmb-font">
-                            El Psy <br> Congroo
+                            Web兼容：屏蔽某些过于拉胯的浏览器 ♿
                         </h1>
 
                         
@@ -251,7 +260,7 @@
                                 </li>
                                 <li>
                                     <span>
-                                        tags
+                                        2023
                                     </span
                                 ></li>
                             </ul>
@@ -283,7 +292,17 @@
 <div class="trm-main-card-frame trm-sidebar">
     <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
     
-        <!-- card header -->
+        <div class="trm-user-tabs" id="sidebar-tabs">
+           <div class="trm-tabs-nav trm-mb-40" id="trm-tabs-nav">
+                <div data-to="tabs-user" class="trm-tabs-nav-item">
+                    <i class="iconfont fas fa-user-alt"></i>
+                </div>
+                <div data-to="tabs-toc" class="trm-tabs-nav-item active">
+                    <i class="iconfont fas fa-th-list"></i>
+                </div>
+           </div>
+            <div name="tabs-user" class="trm-tabs-item">
+                <!-- card header -->
 <div class="trm-mc-header">
     <div class="trm-avatar-frame trm-mb-20">
         <img alt="Avatar" class="trm-avatar" src="/img/avatar.jpg">
@@ -301,7 +320,7 @@
     
 </div>
 <!-- card header end -->
-        <!-- sidebar social -->
+                <!-- sidebar social -->
 
 <div class="trm-divider trm-mb-40 trm-mt-40"></div>
 <div class="trm-social">
@@ -317,7 +336,7 @@
 </div>
 
 <!-- sidebar social end -->
-        <!-- info -->
+                <!-- info -->
 <div class="trm-divider trm-mb-40 trm-mt-40"></div>
 <ul class="trm-table trm-mb-20">
     
@@ -369,7 +388,7 @@
 </ul>
 <!-- info end -->
 
-        
+                
     <div class="trm-divider trm-mb-40 trm-mt-40"></div>
     <!-- action button -->
     <div class="text-center">
@@ -380,6 +399,13 @@
     </div>
     <!-- action button end -->
 
+            </div>
+            <div name="tabs-toc" class="trm-tabs-item active">
+                <div class="post-toc">
+    <ol class="toc"><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#Web-兼容：屏蔽某些过于拉胯的浏览器-♿"  data-scroll-to="#Web-兼容：屏蔽某些过于拉胯的浏览器-♿"><span class="toc-number">1.</span> <span class="toc-text">Web 兼容：屏蔽某些过于拉胯的浏览器 ♿</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#前言"  data-scroll-to="#前言"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#手机-QQ-内置浏览器"  data-scroll-to="#手机-QQ-内置浏览器"><span class="toc-number">1.2.</span> <span class="toc-text">手机 QQ 内置浏览器</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#百度贴吧-APP"  data-scroll-to="#百度贴吧-APP"><span class="toc-number">1.3.</span> <span class="toc-text">百度贴吧 APP</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#微信-x2F-QQ-浏览器"  data-scroll-to="#微信-x2F-QQ-浏览器"><span class="toc-number">1.4.</span> <span class="toc-text">微信 &#x2F; QQ 浏览器</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#已知在上述浏览器中出现的兼容性问题"  data-scroll-to="#已知在上述浏览器中出现的兼容性问题"><span class="toc-number">1.5.</span> <span class="toc-text">已知在上述浏览器中出现的兼容性问题</span></a></li></ol></li></ol>
+</div>
+            </div>
+        </div>
     
     </div>
 </div>
@@ -390,203 +416,142 @@
                 <div class="trm-content" id="trm-content">
                     <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
 
-                    <div class="row">
-    <div class="col-lg-12">
-        <div class="trm-card">
-            <div style="padding: 0 20px;">
-                
-                    <ul class="row trm-tag-list trm-list" itemprop="keywords"><li class="col-lg-4 trm-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a><span class="tag-list-count">1</span></li><li class="col-lg-4 trm-list-item"><a class="tag-list-link" href="/tags/JS/" rel="tag">JS</a><span class="tag-list-count">3</span></li><li class="col-lg-4 trm-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">2</span></li><li class="col-lg-4 trm-list-item"><a class="tag-list-link" href="/tags/Web-API/" rel="tag">Web API</a><span class="tag-list-count">1</span></li><li class="col-lg-4 trm-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="tag">二分查找</a><span class="tag-list-count">1</span></li><li class="col-lg-4 trm-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">6</span></li><li class="col-lg-4 trm-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a><span class="tag-list-count">1</span></li><li class="col-lg-4 trm-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li></ul>
-                
-            </div>
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            2023/02/26
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            16:23
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Tako Senpai
         </div>
     </div>
 </div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="Web-兼容：屏蔽某些过于拉胯的浏览器-♿"><a href="#Web-兼容：屏蔽某些过于拉胯的浏览器-♿" class="headerlink" title="Web 兼容：屏蔽某些过于拉胯的浏览器 ♿"></a>Web 兼容：屏蔽某些过于拉胯的浏览器 ♿</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前一阵子部署了一个网站，主要服务对象是国内用户。有一部分手机用户在通过 QQ 和 百度贴吧 APP 分享了网站的链接后，会用这些 app 内置的简易版浏览器打开我的网站。</p>
+<p>这些浏览器因为种种原因，对现有的 WEB 标准进行了阉割，里面的兼容性问题层出不穷：黑色的按钮能显示成白的，背景颜色 rgba、filter 无效等等。想来想去也没有特别好的方案，最后还是一狠心，干脆直接屏蔽这些 app 吧。下面是我整理的几种常用 app 的内置浏览器检测方式。</p>
+<h2 id="手机-QQ-内置浏览器"><a href="#手机-QQ-内置浏览器" class="headerlink" title="手机 QQ 内置浏览器"></a>手机 QQ 内置浏览器</h2><p>腾讯的浏览器还是比较收敛的，没有篡改 ua。可以直接通过 <code>useragent</code> 来识别手机 QQ 内置浏览器。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (navigator.<span class="property">userAgent</span>.<span class="title function_">includes</span>(<span class="string">&quot;QQ/&quot;</span>)) &#123;</span><br><span class="line">    isQQ = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<!-- history -->
+<h2 id="百度贴吧-APP"><a href="#百度贴吧-APP" class="headerlink" title="百度贴吧 APP"></a>百度贴吧 APP</h2><p>百度贴吧的浏览器修改了 <code>useragent</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Mozilla/5.0 (Linux; Android 7.1.1; XXXXX; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/48.0.2564.116 Mobile Safari/537.36 T7/9.1</span><br></pre></td></tr></table></figure>
 
-<div class="row">
+<p>从 ua 里面是看不出跟百度有什么关系的。好在由于用户一般是从贴吧 APP 中直接打开的链接，我们可以通过 <code>document.referrer</code> 来判断是否是从贴吧打开的链接。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="variable language_">document</span>.<span class="property">referrer</span>.<span class="title function_">includes</span>(<span class="string">&#x27;tieba&#x27;</span>)) &#123;</span><br><span class="line">    isTieba = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="微信-x2F-QQ-浏览器"><a href="#微信-x2F-QQ-浏览器" class="headerlink" title="微信 &#x2F; QQ 浏览器"></a>微信 &#x2F; QQ 浏览器</h2><p>哦，您已经帮我屏蔽了。那没事了。</p>
+<p><img src="/static/BlockBrowsers/WechatBrowser.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h2 id="已知在上述浏览器中出现的兼容性问题"><a href="#已知在上述浏览器中出现的兼容性问题" class="headerlink" title="已知在上述浏览器中出现的兼容性问题"></a>已知在上述浏览器中出现的兼容性问题</h2><ul>
+<li><code>backdrop-filter: blur()</code> 毛玻璃效果无效</li>
+<li><code>background-color: rgba()</code> rgba 颜色无效，显示为全透明或白色</li>
+<li><code>background-image</code> 部分用户截图可以看到背景图片显示为黑色，我的环境下没出现这种 bug，无法复现。</li>
+</ul>
+
+</article>
+    
+    
+
+<ul class="trm-post-copyright">
+    <li class="trm-post-copyright-author">
+        <strong>本文作者：</strong>
+        Tako Senpai
+    </li>
+    <li class="trm-post-copyright-link">
+        <strong>本文链接：</strong>
+        <a id="original-link" href="http://takosenpai2687.github.io/2023/02/26/Web%E5%85%BC%E5%AE%B9%EF%BC%9A%E5%B1%8F%E8%94%BD%E6%9F%90%E4%BA%9B%E8%BF%87%E4%BA%8E%E6%8B%89%E8%83%AF%E7%9A%84%E5%9B%BD%E4%BA%A7%E6%B5%8F%E8%A7%88%E5%99%A8/" title="Web兼容：屏蔽某些过于拉胯的浏览器 ♿">http://takosenpai2687.github.io/2023/02/26/Web%E5%85%BC%E5%AE%B9%EF%BC%9A%E5%B1%8F%E8%94%BD%E6%9F%90%E4%BA%9B%E8%BF%87%E4%BA%8E%E6%8B%89%E8%83%AF%E7%9A%84%E5%9B%BD%E4%BA%A7%E6%B5%8F%E8%A7%88%E5%99%A8/</a>
+    </li>
+    <li class="trm-post-copyright-license">
+        <strong>版权声明：</strong>
+        本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 ">CC BY-NC-SA 4.0</a> 许可协议。
+    </li>
+</ul>
+
+</div>
+<div id="post-next-prev" class="row">
     <div class="col-lg-12">
         <!-- title -->
         <h5 class="trm-title-with-divider">
-            
-                前端
-            
-            <span data-number="01"></span>
+            其他文章
+            <span data-number="02"></span>
         </h5>
     </div>
-    <div class="col-lg-12">
-        <!-- timeline -->
-        <div class="trm-timeline">
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/04/15/81.Search%20in%20Rotated%20Sorted%20Array%20II/" class="trm-cover-frame trm-anima-link">
             
-            <div class="trm-timeline-item trm-scroll-animation" data-scroll data-scroll-offset="40">
-                <div class="trm-timeline-mark-light"></div>
-                <div class="trm-timeline-mark"></div>
-                <div class="trm-a trm-timeline-content more">
-                    
-                        <div class="trm-card-header">
-                            <div class="trm-left-side">
-                                <h6>
-                                    <a href="/2023/02/26/Web%E5%85%BC%E5%AE%B9%EF%BC%9A%E5%B1%8F%E8%94%BD%E6%9F%90%E4%BA%9B%E8%BF%87%E4%BA%8E%E6%8B%89%E8%83%AF%E7%9A%84%E5%9B%BD%E4%BA%A7%E6%B5%8F%E8%A7%88%E5%99%A8/" class="trm-anima-link">
-                                        Web兼容：屏蔽某些过于拉胯的浏览器 ♿
-                                    </a>
-                                </h6>
-                                <div class="trm-text-sm trm-accent-color trm-mt-15">
-                                    <ul class="trm-card-data trm-label ">
-                                        <li class="trm-accent-color">2023/02/26</li>
-                                        <li class="trm-accent-color">16:23</li>
-                                        
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    
-                </div>
+            
+                <img alt="cover" class="no-fancybox" src="/static/leetcode/81.webp">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E7%AE%97%E6%B3%95/">
+                    算法
+                </a>
             </div>
-            
-            <div class="trm-timeline-item trm-scroll-animation" data-scroll data-scroll-offset="40">
-                <div class="trm-timeline-mark-light"></div>
-                <div class="trm-timeline-mark"></div>
-                <div class="trm-a trm-timeline-content more">
-                    
-                        <div class="trm-card-header">
-                            <div class="trm-left-side">
-                                <h6>
-                                    <a href="/2023/02/23/JavaScript%EF%BC%9A%E6%B7%B1%E6%8B%B7%E8%B4%9D%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="trm-anima-link">
-                                        JavaScript：深拷贝的实现 ✂️
-                                    </a>
-                                </h6>
-                                <div class="trm-text-sm trm-accent-color trm-mt-15">
-                                    <ul class="trm-card-data trm-label ">
-                                        <li class="trm-accent-color">2023/02/23</li>
-                                        <li class="trm-accent-color">15:08</li>
-                                        
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    
-                </div>
-            </div>
-            
-            <div class="trm-timeline-item trm-scroll-animation" data-scroll data-scroll-offset="40">
-                <div class="trm-timeline-mark-light"></div>
-                <div class="trm-timeline-mark"></div>
-                <div class="trm-a trm-timeline-content more">
-                    
-                        <div class="trm-card-header">
-                            <div class="trm-left-side">
-                                <h6>
-                                    <a href="/2023/02/10/Base64%E5%9B%BE%E7%89%87%E7%9A%84%E7%BC%96%E8%A7%A3%E7%A0%81/" class="trm-anima-link">
-                                        Base64 图片的编解码 🖼️
-                                    </a>
-                                </h6>
-                                <div class="trm-text-sm trm-accent-color trm-mt-15">
-                                    <ul class="trm-card-data trm-label ">
-                                        <li class="trm-accent-color">2023/02/10</li>
-                                        <li class="trm-accent-color">17:49</li>
-                                        
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    
-                </div>
-            </div>
-            
-            <div class="trm-timeline-item trm-scroll-animation" data-scroll data-scroll-offset="40">
-                <div class="trm-timeline-mark-light"></div>
-                <div class="trm-timeline-mark"></div>
-                <div class="trm-a trm-timeline-content more">
-                    
-                        <div class="trm-card-header">
-                            <div class="trm-left-side">
-                                <h6>
-                                    <a href="/2023/02/07/CSS%E4%BF%AE%E7%82%BC%E6%97%A5%E8%AE%B0%EF%BC%9A%E6%8F%90%E7%93%A6%E7%89%B9%E7%9A%84%E6%98%9F%E7%A9%BA/" class="trm-anima-link">
-                                        CSS 修炼日记：提瓦特的星空 ⭐
-                                    </a>
-                                </h6>
-                                <div class="trm-text-sm trm-accent-color trm-mt-15">
-                                    <ul class="trm-card-data trm-label ">
-                                        <li class="trm-accent-color">2023/02/07</li>
-                                        <li class="trm-accent-color">19:01</li>
-                                        
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    
-                </div>
-            </div>
-            
-            <div class="trm-timeline-item trm-scroll-animation" data-scroll data-scroll-offset="40">
-                <div class="trm-timeline-mark-light"></div>
-                <div class="trm-timeline-mark"></div>
-                <div class="trm-a trm-timeline-content more">
-                    
-                        <div class="trm-card-header">
-                            <div class="trm-left-side">
-                                <h6>
-                                    <a href="/2023/02/05/WebAPI%EF%BC%9A%E4%BD%BF%E7%94%A8-MutationObserver-%E7%9B%91%E5%90%AC-DOM-%E5%8F%98%E5%8C%96/" class="trm-anima-link">
-                                        WebAPI：使用 MutationObserver 监听 DOM 变化 🩺
-                                    </a>
-                                </h6>
-                                <div class="trm-text-sm trm-accent-color trm-mt-15">
-                                    <ul class="trm-card-data trm-label ">
-                                        <li class="trm-accent-color">2023/02/05</li>
-                                        <li class="trm-accent-color">17:54</li>
-                                        
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    
-                </div>
-            </div>
-            
-            <div class="trm-timeline-item trm-scroll-animation" data-scroll data-scroll-offset="40">
-                <div class="trm-timeline-mark-light"></div>
-                <div class="trm-timeline-mark"></div>
-                <div class="trm-a trm-timeline-content more">
-                    
-                        <div class="trm-card-header">
-                            <div class="trm-left-side">
-                                <h6>
-                                    <a href="/2023/01/27/Mixed%20Content%EF%BC%9A%E6%B7%B7%E5%90%88%E5%86%85%E5%AE%B9%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="trm-anima-link">
-                                        Mixed Content：混合内容的解决方案 🍸
-                                    </a>
-                                </h6>
-                                <div class="trm-text-sm trm-accent-color trm-mt-15">
-                                    <ul class="trm-card-data trm-label ">
-                                        <li class="trm-accent-color">2023/01/27</li>
-                                        <li class="trm-accent-color">16:11</li>
-                                        
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    
-                </div>
-            </div>
-            
+            <h5>
+                <a href="/2023/04/15/81.Search%20in%20Rotated%20Sorted%20Array%20II/" class="trm-anima-link">
+                    LeetCode 81. Search in Rotated Sorted Array II
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>2023/04/15</li>
+                <li>17:23</li>
+                
+                
+            </ul>
         </div>
-        <!-- timeline end -->
     </div>
 </div>
-
-<!-- history end -->
-
-
-    <div class="trm-pagination">
-        <span class="page-number current">1</span>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/02/23/JavaScript%EF%BC%9A%E6%B7%B1%E6%8B%B7%E8%B4%9D%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/static/DeepClone/CopyPaste.webp">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%89%8D%E7%AB%AF/">
+                    前端
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/02/23/JavaScript%EF%BC%9A%E6%B7%B1%E6%8B%B7%E8%B4%9D%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="trm-anima-link">
+                    JavaScript：深拷贝的实现 ✂️
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>2023/02/23</li>
+                <li>15:08</li>
+                
+                
+            </ul>
+        </div>
     </div>
+</div>
+    
+</div>
 
-
+    
 
 
 
@@ -628,6 +593,10 @@
             <!-- body end -->
 
             <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
     
     
         <div class="trm-fixed-btn" data-title="单栏和双栏切换" onclick="asyncFun.switchSingleColumn()">
@@ -671,6 +640,10 @@
     
 
     <!-- 评论插件 -->
+    
+        
+
+        
     
 
 

@@ -3611,19 +3611,50 @@ pre .coffeescript .title {
 :root .trm-publication li {
   color: var(--theme-color, #00283a) !important;
 }
+:root.dart .post-toc .toc-link,
+:root .post-toc .toc-link {
+  white-space: normal !important;
+}
 :root.dart .trm-banner img,
 :root .trm-banner img {
   object-position: center bottom !important;
   filter: saturate(1.3);
   -webkit-filter: saturate(1.3);
 }
+:root.dart .trm-publication a,
+:root .trm-publication a {
+  background: none !important;
+  color: #bfc42b !important;
+  transition: none !important;
+  font-weight: bold !important;
+}
+:root.dart .trm-publication a:hover,
+:root .trm-publication a:hover {
+  color: #dfc62b !important;
+}
 @media (min-width: 1200px) and (max-width: 1440px) {
   .container {
     max-width: 1140px !important;
   }
 }
-@media (min-width: 1440) {
+@media (min-width: 1440px) {
   .container {
     max-width: 1440px !important;
+  }
+}
+@media (min-width: 1281px) {
+  .c-scrollbar {
+    width: 8px !important;
+    top: 4px !important;
+    bottom: 4px !important;
+    height: calc(100vh - 8px) !important;
+    transition: none !important;
+  }
+  .c-scrollbar .c-scrollbar_thumb {
+    width: 8px !important;
+    right: 0 !important;
+    border-radius: 8px !important;
+    background-color: var(--primary, #afb42b) !important;
+    opacity: 1 !important;
   }
 }
