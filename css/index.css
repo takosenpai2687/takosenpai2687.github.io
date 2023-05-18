@@ -671,7 +671,7 @@ html.is-animating .trm-swup-animation {
   }
   .trm-app-frame {
     border: 0;
-    overflow: scroll;
+    overflow: hidden scroll;
     border-radius: 0;
     width: 100%;
     height: 100%;
@@ -1156,13 +1156,12 @@ html.is-animating .trm-swup-animation {
 }
 blockquote {
   box-shadow: var(--box-shadow2, 0 2px 4px -2px rgba(0, 0, 0, 0.15));
-  padding: 0;
   margin: 0;
   display: block;
   position: relative;
   background-color: var(--theme-bg-color, #fcfcfe);
   color: var(--theme-color, #00283a);
-  padding: var(--card-padding, 40px);
+  padding: 40px var(--card-padding, 40px);
   border-radius: var(--card-border-radius, 10px);
   font-style: italic;
   font-size: 16px;
@@ -1181,13 +1180,12 @@ blockquote:before {
 }
 blockquote:after {
   margin: 0;
-  width: 50px;
   color: var(--primary, #afb42b);
   line-height: 55px;
   content: '"';
   position: absolute;
-  bottom: -20px;
-  right: 2px;
+  bottom: -16px;
+  right: 16px;
   font-size: 54px;
 }
 .trm-card {
@@ -1502,6 +1500,7 @@ blockquote:after {
   overflow: hidden;
 }
 .trm-blog-card .trm-cover-frame .trm-cover-date,
+.trm-blog-card .trm-cover-frame .trm-cover-img,
 .trm-blog-card .trm-cover-frame img {
   position: absolute;
   top: 0;
@@ -1529,6 +1528,11 @@ blockquote:after {
 .trm-blog-card .trm-cover-frame .trm-cover-date .trm-cover-month {
   font-size: 20px;
 }
+.trm-blog-card .trm-cover-frame .trm-cover-img {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
 .trm-blog-card .trm-card-descr {
   padding: var(--card-padding, 40px);
 }
@@ -1548,6 +1552,7 @@ blockquote:after {
   opacity: 1;
   color: var(--primary, #afb42b);
 }
+.trm-blog-card:hover .trm-cover-frame .trm-cover-img,
 .trm-blog-card:hover .trm-cover-frame img {
   transform: scale(1);
 }
@@ -2520,6 +2525,9 @@ footer .footer-separator::before {
   padding: 0;
   margin: 0;
 }
+.trm-publication .katex svg {
+  margin: unset;
+}
 .trm-publication [data-fancybox] + em {
   display: block;
   font-size: 0.9rem;
@@ -2573,13 +2581,6 @@ footer .footer-separator::before {
   margin-bottom: 1rem;
   font-weight: bold;
   font-size: initial;
-}
-.trm-publication h1 a,
-.trm-publication h2 a,
-.trm-publication h3 a,
-.trm-publication h4 a,
-.trm-publication h5 a {
-  display: none;
 }
 .trm-publication h4:before,
 .trm-publication h5:before,
@@ -3116,18 +3117,20 @@ footer .footer-separator::before {
 }
 .trm-exit-readmode {
   position: fixed;
-  top: 30px;
-  right: 30px;
+  bottom: 30px;
+  right: 20px;
   z-index: 100;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 8px;
   font-size: 1.2rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  border-radius: 6px;
   border: none;
+  background-color: var(--fixed-button-bg-color);
+  color: var(--fixed-button-color);
 }
 .trm-exit-readmode:hover {
-  background-color: var(--primary-70, #afb42b);
-  color: #fcfcfe;
+  color: var(--primary);
 }
 .trm-single-column .trm-banner .col-lg-8 {
   flex: 0 0 100%;
@@ -3461,7 +3464,7 @@ pre .coffeescript .title {
   z-index: 10;
   right: 20px;
   height: 200px;
-  top: calc(100vh - 200px - 40px);
+  top: calc(100vh - 200px + 6px);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -3508,24 +3511,8 @@ pre .coffeescript .title {
   opacity: 1;
   transform: translate(0, -50%) scale(1);
 }
-.trm-fixed-container.offset {
-  top: calc(100vh - 200px - 86px);
-}
-.trm-back-top {
-  position: fixed;
-  right: 30px;
-  bottom: 30px;
-  font-size: 1.2rem;
-  width: 2.5rem;
-  height: 2.5rem;
-  text-align: center;
-  line-height: 2.5rem;
-  border-radius: 6px;
-  cursor: pointer;
+.trm-fixed-container .trm-fixed-btn#trm-back-top {
   transform: translateY(50px) scale(0);
-  z-index: 20;
-  background-color: var(--fixed-button-bg-color);
-  color: var(--fixed-button-color);
   opacity: 0;
   transition: all 0.4s ease-in-out;
   background-image: var(--scroll-progress-bg-color);
@@ -3533,17 +3520,12 @@ pre .coffeescript .title {
   background-size: 100% 0;
   background-position: bottom;
 }
-.trm-back-top.active-el {
+.trm-fixed-container.offset {
+  top: calc(100vh - 200px - 2.5rem);
+}
+.trm-fixed-container.offset #trm-back-top {
   opacity: 1;
   transform: translateY(0) scale(1);
-}
-.trm-back-top:hover {
-  color: var(--primary);
-}
-@media (max-width: 992px) {
-  .trm-fixed-container {
-    right: 30px;
-  }
 }
 :root.dart .trm-top-bar .trm-logo-frame.trm-anima-link > img,
 :root .trm-top-bar .trm-logo-frame.trm-anima-link > img {
