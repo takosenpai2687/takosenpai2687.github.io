@@ -1,0 +1,140 @@
+---
+title: CSS修炼日记：派蒙的圣遗物 🏆
+date: 2023-03-11 11:54:23
+tags:
+    - 前端
+    - CSS
+categories:
+    - 前端
+cover: [static/TeyvatStars/paimon.gif]
+author: Tako Senpai
+---
+
+# CSS 修炼日记：派蒙的圣遗物 🏆
+
+## 前言
+
+开学了有点忙，takotako 摆烂了一个月 🏖️。今天在赶完第 n 个 due 之后想起了[前文](https://takosenpai2687.github.io/2023/02/07/CSS%E4%BF%AE%E7%82%BC%E6%97%A5%E8%AE%B0%EF%BC%9A%E6%8F%90%E7%93%A6%E7%89%B9%E7%9A%84%E6%98%9F%E7%A9%BA/)立过的 flag，于是写了这篇文章，记录一下当时做派蒙圣遗物转盘的技术细节。最终的实现效果如下：
+
+![](static/TeyvatStars/paimon.gif)
+
+## 准备材料
+
+-   可愛いの派蒙一只（gif，背景透明）
+
+![](static/Paimon/paimon.gif)
+
+-   关于背景请参考 [CSS 修炼日记：提瓦特的星空 ⭐](https://takosenpai2687.github.io/2023/02/07/CSS%E4%BF%AE%E7%82%BC%E6%97%A5%E8%AE%B0%EF%BC%9A%E6%8F%90%E7%93%A6%E7%89%B9%E7%9A%84%E6%98%9F%E7%A9%BA/)
+
+## DOM 结构
+
+```HTML
+<div
+    class="perspective-box"
+    onmousedown="handleMouseDown(event)"
+    onmousemove="handleMouseMove(event)"
+    onmouseup="handleMouseUp(event)"
+    onmouseleave="handleMouseLeave(event)"
+>
+    <img class="paimon" src="./paimon.gif" />
+    <!-- 1 -->
+    <div class="artifact" onclick="handleClickArtifactBox(event, 0)">
+        <img draggable="false" src="artifact-flower.webp" alt="" />
+    </div>
+    <!-- 2 -->
+    <div class="artifact" onclick="handleClickArtifactBox(event, 1)">
+        <img draggable="false" src="artifact-plume.webp" alt="" />
+    </div>
+    <!-- 3 -->
+    <div class="artifact" onclick="handleClickArtifactBox(event, 2)">
+        <img draggable="false" src="artifact-hourglass.webp" alt="" />
+    </div>
+    <!-- 4 -->
+    <div class="artifact" onclick="handleClickArtifactBox(event, 3)">
+        <img draggable="false" src="artifact-goblet.webp" alt="" />
+    </div>
+    <!-- 5 -->
+    <div class="artifact" onclick="handleClickArtifactBox(event, 4)">
+        <img draggable="false" src="artifact-circlet.webp" alt="" />
+    </div>
+</div>
+```
+
+派蒙 `paimon` 和五个圣遗物 `artifact` 并列存在于一个容器 `perspective-box` 中，绝对定位。
+
+定义一下 perspective-box 的样式：因为子元素是绝对定位，所以父元素需要相对定位；为了实现俯视的 3d 效果，我们对 perspective-origin 设置了 center top，即中+上。
+
+```CSS
+.perspective-box {
+    height: 100%;
+    background-color: #26457a;
+    position: relative;
+    perspective: 1000px;
+    perspective-origin: center top;
+    transform-style: preserve-3d;
+    user-select: none;
+}
+```
+
+## 派蒙 👶
+
+首先写一下 paimon 的样式。将盒子居中，再用 drop-shadow 加点发光的特效 ✨
+
+```CSS
+:root {
+    --glow-norm: drop-shadow(0 0 5px rgba(255, 255, 200, 0.8));
+    --glow-intense: drop-shadow(0 0 8px rgba(255, 255, 200, 0.8));
+}
+
+.paimon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 397px;
+    height: 465px;
+    animation: 3s infinite linear paimon-glow;
+}
+
+@keyframes paimon-glow {
+    0% {
+        -webkit-filter: var(--glow-norm);
+        filter: var(--glow-norm);
+    }
+
+    50% {
+        -webkit-filter: var(--glow-intense);
+        filter: var(--glow-intense);
+    }
+
+    100% {
+        -webkit-filter: var(--glow-norm);
+        filter: var(--glow-norm);
+    }
+}
+```
+
+## 圣遗物泡泡 🫧
+
+圣遗物泡泡做得比较简陋，直接用了两层 box-shadow。用一个伪类来实现泡泡的光晕效果。
+
+```CSS
+.artifact {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #ffffc888 inset, 0 0 6px #ffffc888;
+}
+.artifact > img {
+    width: 50%;
+    height: 50%;
+    opacity: 0.3;
+}
+
+```

@@ -1,145 +1,141 @@
 # 主题
 theme:
-    switch: true
-    default: style-light
+  switch: true
+  default: style-light
 
 # 图标
 favicon:
-    logo: /img/logo-black.png
-    hidden: /img/tako.png?v=1
-    icon16: /img/tako.png?v=1
-    icon32: /img/tako.png?v=1
+  logo: /img/logo-black.png
+  hidden: /img/tako.png?v=1
+  icon16: /img/tako.png?v=1
+  icon32: /img/tako.png?v=1
 
 # 用户信息
 user:
-    name: Tako Senpai
-    first_name: Tako
-    last_name:
-    email: takosenpai2687@gmail.com
-    domain: https://takosenpai2687.github.io/
-    avatar: /img/avatar.jpg
-    describe: Tako Senpai lives here.
+  name: Tako Senpai
+  first_name: Tako
+  last_name:
+  email: takosenpai2687@gmail.com
+  domain: https://takosenpai2687.github.io/
+  avatar: /img/avatar.jpg
+  describe: Tako Senpai lives here.
 
 # 导航栏
 top_bars:
-    - title: 主页
-      url: /
-    - title: 归档
-      url: /archives/
-    - title: 分类
-      url: /categories/
-    - title: 标签
-      url: /tags/
-    - title: 友链
-      url: /links/
+  - title: 主页
+    url: /
+  - title: 归档
+    url: /archives/
+  - title: 分类
+    url: /categories/
+  - title: 标签
+    url: /tags/
+  - title: 友链
+    url: /links/
 
 # 侧边栏
 sidebar:
-    social: # 社交地址
-        - name: github
-          icon: fab fa-github
-          url: https://github.com/takosenpai2687
-        - name: takotako
-          icon: 🐙
+  social: # 社交地址
+    - name: github
+      icon: fab fa-github
+      url: https://github.com/takosenpai2687
+    - name: takotako
+      icon: 🐙
 
-    # 打字动画
-    typedTextPrefix: Student
-    typedText: ["&& Web Developer"]
+  # 打字动画
+  typedTextPrefix: Student
+  typedText: ["&& Web Developer"]
 
-    # 个人信息
-    info:
-        - key: 📍
-          val: Sydney
-        - key: 🎂
-          val: June 3
-        - key: 🌐
-          val: 中文, English
-        - key: 🏫(UG)
-          val: UNSW
-        - key: 🏫(PG)
-          val: USyd
+  # 个人信息
+  info:
+    - key: 📍
+      val: Shanghai
+    - key: 🎂
+      val: June 3
+    - key: 🌐
+      val: 中文, English
 
 # 横幅
 banner:
-    index:
-        type: img
-        bgurl: /img/sky.png
-        bannerTitle: El Psy <br> Congroo
-        bannerText:
-        fit: cover
-    archive:
-        type: img
-        bgurl: /img/sky.png
-        bannerTitle: El Psy <br> Congroo
-        bannerText:
-        fit: cover
-    links:
-        type: img
-        bgurl: /img/sky.png
-        bannerTitle: El Psy <br> Congroo
-        bannerText:
-        fit: cover
-    default:
-        type: img
-        bgurl: /img/sky.png
-        bannerTitle: El Psy <br> Congroo
-        bannerText: <body>
-        fit: cover
+  index:
+    type: img
+    bgurl: /img/sky.png
+    bannerTitle: Good things never come from <br> Comfort Zones
+    bannerText:
+    fit: cover
+  archive:
+    type: img
+    bgurl: /img/sky.png
+    bannerTitle: Good things never come from <br> Comfort Zones
+    bannerText:
+    fit: cover
+  links:
+    type: img
+    bgurl: /img/sky.png
+    bannerTitle: Good things never come from <br> Comfort Zones
+    bannerText:
+    fit: cover
+  default:
+    type: img
+    bgurl: /img/sky.png
+    bannerTitle: Good things never come from <br> Comfort Zones
+    bannerText: <body>
+    fit: cover
 
 # 页脚
 footer:
-    powered:
-        enable: true
+  powered:
+    enable: true
 
 # 布局
 layout:
-    path: layout
+  path: layout
 
 # 文章目录
 toc:
-    enable: true
-    list_number: true
-    max_depth: 3
-    min_depth: 1
+  enable: true
+  list_number: true
+  max_depth: 3
+  min_depth: 1
 
 # 版权信息
 creative_commons:
-    license: by-nc-sa
-    language: deed.zh
-    post: true
-    clipboard: false
+  license: by-nc-sa
+  language: deed.zh
+  post: true
+  clipboard: false
 
 # 分类卡片
 categorie_card:
-    enable: true
-    len: 3
-    list: ["Frontend", "Backend", "Algorithms"]
+  enable: true
+  len: 3
+  list: ["Frontend", "Backend", "Algorithms"]
 
 # 固定按钮块
 rightside:
-    readmode: true
-    aside: true
+  readmode: true
+  aside: true
 
 # 日期格式化
 datetime_foramt:
-    post_card:
-        date: YYYY/MM/DD
-        time: HH:mm
-    post_info:
-        date: YYYY/MM/DD
-        time: HH:mm
-    archive:
-        date: YYYY/MM/DD
-        time: HH:mm
+  post_card:
+    date: YYYY/MM/DD
+    time: HH:mm
+  post_info:
+    date: YYYY/MM/DD
+    time: HH:mm
+  archive:
+    date: YYYY/MM/DD
+    time: HH:mm
 
 # 代码块
 highlight:
-    theme: true
-    title: default
-    copy: true
-    lang: true
-    code_word_wrap: fasle
-    height_limit: 200 # 超出时，显示折叠按钮
+  theme: true
+  title: default
+  copy: true
+  lang: true
+  code_word_wrap: fasle
+  height_limit: 200 # 超出时，显示折叠按钮
 
 # 友链
 links:
@@ -149,10 +145,10 @@ links:
     desc: Tako Senpai 自研自用的游戏小工具
 
 # 统计
-webAnalytics:  
+webAnalytics:
   enable: true
-  baidu:   
+  baidu:
   google: G-RQ3ECBBKBP
-  tencent: 
+  tencent:
     sid:
     cid:
