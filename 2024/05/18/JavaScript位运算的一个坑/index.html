@@ -7,18 +7,22 @@
 <meta name="full-screen" content="yes">
 <meta name="theme-color" content="#317EFB" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="http://takosenpai2687.github.io/about/index.html">
+<meta name="description" content="JavaScript 位运算的一个坑前言主流的编程语言都支持位运算，JavaScript 也不例外。然而，由于 JavaScript 中所有的数字类型都被统一定义为 64 位浮点数（Number），这在实际进行位运算时可能会带来一些意想不到的结果。 整数溢出的问题考虑以下代码，我们用位运算来求 2^31： 12const a &#x3D; 1 &lt;&lt; 31;  &#x2F;&#x2F; 输出：-2147483648c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 位运算的一个坑">
+<meta property="og:url" content="http://takosenpai2687.github.io/2024/05/18/JavaScript%E4%BD%8D%E8%BF%90%E7%AE%97%E7%9A%84%E4%B8%80%E4%B8%AA%E5%9D%91/index.html">
 <meta property="og:site_name" content="Tako Bay">
+<meta property="og:description" content="JavaScript 位运算的一个坑前言主流的编程语言都支持位运算，JavaScript 也不例外。然而，由于 JavaScript 中所有的数字类型都被统一定义为 64 位浮点数（Number），这在实际进行位运算时可能会带来一些意想不到的结果。 整数溢出的问题考虑以下代码，我们用位运算来求 2^31： 12const a &#x3D; 1 &lt;&lt; 31;  &#x2F;&#x2F; 输出：-2147483648c">
 <meta property="og:locale">
-<meta property="article:published_time" content="2023-02-05T08:17:29.000Z">
-<meta property="article:modified_time" content="2023-02-07T14:12:01.268Z">
+<meta property="article:published_time" content="2024-05-17T20:23:00.000Z">
+<meta property="article:modified_time" content="2024-05-17T21:23:33.927Z">
 <meta property="article:author" content="Tako Senpai">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="JS">
 <meta name="twitter:card" content="summary">
 
 
-<title >about</title>
+<title >JavaScript 位运算的一个坑</title>
 
 <!-- Favicon -->
 
@@ -60,7 +64,7 @@
 
 <!-- Variable -->
 <script>window.ASYNC_CONFIG = {"hostname":"takosenpai2687.github.io","author":"Tako Senpai","root":"/","typed_text":["&& Web Developer"],"theme_version":"2.0.9","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/logo-black.png","icon16":"/img/tako.png?v=1","icon32":"/img/tako.png?v=1","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/img/tako.png?v=1","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":200}};</script>
-<script id="async-page-config">window.PAGE_CONFIG = {"isPost":false,"isHome":false,"postUpdate":"2023-02-08 01:12:01"};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-05-18 07:23:33"};</script>
 
 <!-- Theme mode css -->
 <link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.9" id="trm-switch-style">
@@ -220,8 +224,6 @@
 
             <!-- body -->
             
-
-    
 <div class="trm-content-start">
     <!-- banner -->
     <div class="trm-banner" data-scroll data-scroll-direction="vertical">
@@ -243,10 +245,10 @@
                     <!-- banner title -->
                     <div class="trm-banner-text ">
                         <div class="trm-label trm-mb-20">
-                            &lt;body&gt;
+                            NEWS LETTER
                         </div>
                         <h1 class="trm-mb-30 trm-hsmb-font">
-                            about
+                            JavaScript 位运算的一个坑
                         </h1>
 
                         
@@ -256,7 +258,7 @@
                                 </li>
                                 <li>
                                     <span>
-                                        about
+                                        2024
                                     </span
                                 ></li>
                             </ul>
@@ -288,7 +290,17 @@
 <div class="trm-main-card-frame trm-sidebar">
     <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
     
-        <!-- card header -->
+        <div class="trm-user-tabs" id="sidebar-tabs">
+           <div class="trm-tabs-nav trm-mb-40" id="trm-tabs-nav">
+                <div data-to="tabs-user" class="trm-tabs-nav-item">
+                    <i class="iconfont fas fa-user-alt"></i>
+                </div>
+                <div data-to="tabs-toc" class="trm-tabs-nav-item active">
+                    <i class="iconfont fas fa-th-list"></i>
+                </div>
+           </div>
+            <div name="tabs-user" class="trm-tabs-item">
+                <!-- card header -->
 <div class="trm-mc-header">
     <div class="trm-avatar-frame trm-mb-20">
         <img alt="Avatar" class="trm-avatar" src="/img/avatar.jpg">
@@ -306,7 +318,7 @@
     
 </div>
 <!-- card header end -->
-        <!-- sidebar social -->
+                <!-- sidebar social -->
 
 <div class="trm-divider trm-mb-40 trm-mt-40"></div>
 <div class="trm-social">
@@ -322,7 +334,7 @@
 </div>
 
 <!-- sidebar social end -->
-        <!-- info -->
+                <!-- info -->
 <div class="trm-divider trm-mb-40 trm-mt-40"></div>
 <ul class="trm-table trm-mb-20">
     
@@ -374,7 +386,7 @@
 </ul>
 <!-- info end -->
 
-        
+                
     <div class="trm-divider trm-mb-40 trm-mt-40"></div>
     <!-- action button -->
     <div class="text-center">
@@ -385,6 +397,13 @@
     </div>
     <!-- action button end -->
 
+            </div>
+            <div name="tabs-toc" class="trm-tabs-item active">
+                <div class="post-toc">
+    <ol class="toc"><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#JavaScript-位运算的一个坑"  data-scroll-to="#JavaScript-位运算的一个坑"><span class="toc-number">1.</span> <span class="toc-text">JavaScript 位运算的一个坑</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#前言"  data-scroll-to="#前言"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#整数溢出的问题"  data-scroll-to="#整数溢出的问题"><span class="toc-number">1.2.</span> <span class="toc-text">整数溢出的问题</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#大整数的位运算"  data-scroll-to="#大整数的位运算"><span class="toc-number">1.3.</span> <span class="toc-text">大整数的位运算</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#关于性能"  data-scroll-to="#关于性能"><span class="toc-number">1.4.</span> <span class="toc-text">关于性能</span></a></li></ol></li></ol>
+</div>
+            </div>
+        </div>
     
     </div>
 </div>
@@ -395,7 +414,114 @@
                 <div class="trm-content" id="trm-content">
                     <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
 
-                    
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            2024/05/18
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            06:23
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Tako Senpai
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="JavaScript-位运算的一个坑"><a href="#JavaScript-位运算的一个坑" class="headerlink" title="JavaScript 位运算的一个坑"></a>JavaScript 位运算的一个坑</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>主流的编程语言都支持位运算，JavaScript 也不例外。然而，由于 JavaScript 中所有的数字类型都被统一定义为 64 位浮点数（Number），这在实际进行位运算时可能会带来一些意想不到的结果。</p>
+<h2 id="整数溢出的问题"><a href="#整数溢出的问题" class="headerlink" title="整数溢出的问题"></a>整数溢出的问题</h2><p>考虑以下代码，我们用位运算来求 <code>2^31</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">1</span> &lt;&lt; <span class="number">31</span>;  <span class="comment">// 输出：-2147483648</span></span><br><span class="line"><span class="keyword">const</span> b = <span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="number">2</span>, <span class="number">31</span>);  <span class="comment">// 输出：2147483648</span></span><br></pre></td></tr></table></figure>
+
+<p>为什么会这样呢？原来 JavaScript 中虽然定义了 Number 为 64 位浮点数（double)，但在进行位运算时，会先将数字转换为 32 位有符号整数，然后再进行位运算，最后再返回 64 位。</p>
+<p>因此，我们在进行位运算，特别是左移操作时，要确保不会发生整数溢出的情况，否则炫技不成反而翻车 (0_&lt;)。比如，有些人可能喜欢这样取整：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> aFloat = <span class="number">3.5</span>;</span><br><span class="line"><span class="keyword">const</span> aInt = aFloat &gt;&gt; <span class="number">0</span>;   <span class="comment">// 输出：3</span></span><br></pre></td></tr></table></figure>
+
+<p>但是如果整数溢出了会输出什么呢？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> aFloat = <span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="number">2</span>, <span class="number">31</span>) + <span class="number">0.5</span>; <span class="comment">// 输出：2147483648.5</span></span><br><span class="line"><span class="keyword">const</span> aInt = aFloat &gt;&gt; <span class="number">0</span>; <span class="comment">// 输出：-2147483648，装杯失败</span></span><br><span class="line"><span class="keyword">const</span> aRealInt = <span class="title class_">Math</span>.<span class="title function_">floor</span>(aFloat); <span class="comment">// 输出：2147483648</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="大整数的位运算"><a href="#大整数的位运算" class="headerlink" title="大整数的位运算"></a>大整数的位运算</h2><p>可是如果我们有时候就是想要对大整数进行位运算呢？考虑以下代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a1 = <span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="number">2</span>, <span class="number">32</span>); <span class="comment">// 没有溢出</span></span><br><span class="line"><span class="keyword">const</span> a2 = <span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="number">2</span>, <span class="number">32</span>); <span class="comment">// 没有溢出</span></span><br><span class="line"><span class="keyword">const</span> isEqual = !!(a1 &amp; a2); <span class="comment">// 输出：false</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到，即便我们很小心的使用 pow 来代替左移，但 <code>a &amp; a</code> 得到的结果依然是 false。这是因为在执行位运算时，JavaScript 会将数字转换为32位整数，而这个转换过程会导致数据丢失，从而产生不确定的结果。</p>
+<p>为了解决大数字的位运算，就需要引入 <code>BigInt</code> 类了。好消息是 <code>BigInt</code> 本身也支持位运算符，因此写起来也并不麻烦。和 <code>Number</code> 一样，<code>BigInt</code> 也支持初始化和直接声明（以 n 结尾）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a1 = <span class="number">1n</span> &lt;&lt; <span class="number">31n</span>;    <span class="comment">// 注意：操作符两边都必须是 BigInt</span></span><br><span class="line"><span class="keyword">const</span> a2 = <span class="title class_">BigInt</span>(<span class="number">1</span>) &lt;&lt; <span class="title class_">BigInt</span>(<span class="number">31</span>);</span><br><span class="line"><span class="keyword">const</span> isEqual = !!(a1 &amp; a2) <span class="comment">//输出：true</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="关于性能"><a href="#关于性能" class="headerlink" title="关于性能"></a>关于性能</h2><p>正是由于 JavaScript 位运算时多余的 32 位转换的一步，我们日常写代码时尽量不要用位运算来“提升性能”。这些 tricks 在一些早期的 C++ 编译器中或许有效，但在 JavaScript 中可能反而会变慢。大多数的语言如 JavaScript，Java，C++ 都会在编译器级别对常见的运算进行优化，所以放心使用正常的 Math 库即可，不要玩花里胡哨的。</p>
+
+</article>
+    
+    
+
+<ul class="trm-post-copyright">
+    <li class="trm-post-copyright-author">
+        <strong>本文作者：</strong>
+        Tako Senpai
+    </li>
+    <li class="trm-post-copyright-link">
+        <strong>本文链接：</strong>
+        <a id="original-link" href="http://takosenpai2687.github.io/2024/05/18/JavaScript位运算的一个坑/" title="JavaScript 位运算的一个坑">http://takosenpai2687.github.io/2024/05/18/JavaScript位运算的一个坑/</a>
+    </li>
+    <li class="trm-post-copyright-license">
+        <strong>版权声明：</strong>
+        本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 ">CC BY-NC-SA 4.0</a> 许可协议。
+    </li>
+</ul>
+
+
+</div>
+<div id="post-next-prev" class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2024/05/01/LeetCode%2039.%20Combination%20Sum%EF%BC%9A%E5%9B%9E%E6%BA%AF%E4%B8%8E%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/static/Combinations/permutations-combinations-formulas.png">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E7%AE%97%E6%B3%95/">
+                    算法
+                </a>
+            </div>
+            <h5>
+                <a href="/2024/05/01/LeetCode%2039.%20Combination%20Sum%EF%BC%9A%E5%9B%9E%E6%BA%AF%E4%B8%8E%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88/" class="trm-anima-link">
+                    LeetCode 39. Combination Sum：回溯与排列组合 🔍
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>2024/05/01</li>
+                <li>17:49</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
 
 
                     <div class="trm-divider footer-divider"></div>
@@ -433,10 +559,13 @@
         </div>
     </div>
 </div>
-
             <!-- body end -->
 
             <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
     
     
         <div class="trm-fixed-btn" data-title="单栏和双栏切换" onclick="asyncFun.switchSingleColumn()">
