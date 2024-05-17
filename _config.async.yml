@@ -64,25 +64,25 @@ banner:
     index:
         type: img
         bgurl: /img/sky.png
-        bannerTitle: Good things never came from <br> Comfort Zones
+        bannerTitle: Good things never come from <br> Comfort Zones
         bannerText:
         fit: cover
     archive:
         type: img
         bgurl: /img/sky.png
-        bannerTitle: Good things never came from <br> Comfort Zones
+        bannerTitle: Good things never come from <br> Comfort Zones
         bannerText:
         fit: cover
     links:
         type: img
         bgurl: /img/sky.png
-        bannerTitle: Good things never came from <br> Comfort Zones
+        bannerTitle: Good things never come from <br> Comfort Zones
         bannerText:
         fit: cover
     default:
         type: img
         bgurl: /img/sky.png
-        bannerTitle: Good things never came from <br> Comfort Zones
+        bannerTitle: Good things never come from <br> Comfort Zones
         bannerText: <body>
         fit: cover
 
