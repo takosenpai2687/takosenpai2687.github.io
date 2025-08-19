@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="WebAPI：使用 MutationObserver 监听 DOM 变化前言最近在写一个 TamperMonkey 脚本的时候遇到了一个小问题：页面上有一些组件的内容是延迟加载的，比如需要通过 AJAX 请求来获取的数据。这时，如果我们的脚本依然选择在window.load时调用，会获取不到想要的 DOM 节点或者数据。 那么如何在一个 DOM 节点数据更新了之后再调用我们的脚本呢？这时候就要用到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WebAPI：使用 MutationObserver 监听 DOM 变化 🩺">
+<meta property="og:url" content="http://takosenpai2687.github.io/2023/02/05/WebAPI%EF%BC%9A%E4%BD%BF%E7%94%A8-MutationObserver-%E7%9B%91%E5%90%AC-DOM-%E5%8F%98%E5%8C%96/index.html">
+<meta property="og:site_name" content="Tako Bay">
+<meta property="og:description" content="WebAPI：使用 MutationObserver 监听 DOM 变化前言最近在写一个 TamperMonkey 脚本的时候遇到了一个小问题：页面上有一些组件的内容是延迟加载的，比如需要通过 AJAX 请求来获取的数据。这时，如果我们的脚本依然选择在window.load时调用，会获取不到想要的 DOM 节点或者数据。 那么如何在一个 DOM 节点数据更新了之后再调用我们的脚本呢？这时候就要用到">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-02-05T09:54:04.000Z">
+<meta property="article:modified_time" content="2025-08-19T01:37:11.030Z">
+<meta property="article:author" content="Tako Senpai">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Web API">
+<meta name="twitter:card" content="summary">
+
+
+<title >WebAPI：使用 MutationObserver 监听 DOM 变化 🩺</title>
+
+<!-- Favicon -->
+
+    <link href='/img/tako.png?v=1?v=2.0.9' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/tako.png?v=1?v=2.0.9' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"takosenpai2687.github.io","author":"Tako Senpai","root":"/","typed_text":["&& Web Developer"],"theme_version":"2.0.9","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/logo-black.png","icon16":"/img/tako.png?v=1","icon32":"/img/tako.png?v=1","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/img/tako.png?v=1","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":200}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2025-08-19 09:37:11"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.9" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+
+     
+
+    
+        <!-- Google Analytics -->
+        <script async src='https://www.googletagmanager.com/gtag/js?id=G-RQ3ECBBKBP'></script>
+        <script defer>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-RQ3ECBBKBP');
+        </script>
+    
+
+    
+ 
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/img/logo-black.png">
+    
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    主页
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    归档
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/categories/" target="">
+                    分类
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/tags/" target="">
+                    标签
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/links/" target="">
+                    友链
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/sky.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            WebAPI：使用 MutationObserver 监听 DOM 变化 🩺
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2023
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div id="page-sidebar" class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    
+
+<div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
+        <div class="trm-user-tabs" id="sidebar-tabs">
+           <div class="trm-tabs-nav trm-mb-40" id="trm-tabs-nav">
+                <div data-to="tabs-user" class="trm-tabs-nav-item">
+                    <i class="iconfont fas fa-user-alt"></i>
+                </div>
+                <div data-to="tabs-toc" class="trm-tabs-nav-item active">
+                    <i class="iconfont fas fa-th-list"></i>
+                </div>
+           </div>
+            <div name="tabs-user" class="trm-tabs-item">
+                <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/avatar.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        Tako Senpai
+    </h5>
+    
+        <div class="trm-label">
+            Student
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+                <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com/takosenpai2687" title="github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="/" title="takotako" rel="nofollow" target="_blank">
+            <i class="iconfont 🐙"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+                <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                📍:
+            </div>
+            <div class="trm-label trm-label-light">
+                Sydney
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                🎂:
+            </div>
+            <div class="trm-label trm-label-light">
+                June 3
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                🌐:
+            </div>
+            <div class="trm-label trm-label-light">
+                中文, English
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                🏫(UG):
+            </div>
+            <div class="trm-label trm-label-light">
+                UNSW
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                🏫(PG):
+            </div>
+            <div class="trm-label trm-label-light">
+                USyd
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+                
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:takosenpai2687@gmail.com" class="trm-btn">
+            联系我
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+            </div>
+            <div name="tabs-toc" class="trm-tabs-item active">
+                <div class="post-toc">
+    <ol class="toc"><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#WebAPI：使用-MutationObserver-监听-DOM-变化"  data-scroll-to="#WebAPI：使用-MutationObserver-监听-DOM-变化"><span class="toc-number">1.</span> <span class="toc-text">WebAPI：使用 MutationObserver 监听 DOM 变化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#前言"  data-scroll-to="#前言"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#什么是-MutationObserver"  data-scroll-to="#什么是-MutationObserver"><span class="toc-number">1.2.</span> <span class="toc-text">什么是 MutationObserver ?</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#使用方法"  data-scroll-to="#使用方法"><span class="toc-number">1.3.</span> <span class="toc-text">使用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#1-创建一个新的-Mutation-监听器"  data-scroll-to="#1-创建一个新的-Mutation-监听器"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. 创建一个新的 Mutation 监听器</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#2-开始监听"  data-scroll-to="#2-开始监听"><span class="toc-number">1.3.2.</span> <span class="toc-text">2. 开始监听</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#3-结束监听"  data-scroll-to="#3-结束监听"><span class="toc-number">1.3.3.</span> <span class="toc-text">3. 结束监听</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#一个栗子-🌰"  data-scroll-to="#一个栗子-🌰"><span class="toc-number">1.4.</span> <span class="toc-text">一个栗子 🌰</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#参考"  data-scroll-to="#参考"><span class="toc-number">1.5.</span> <span class="toc-text">参考</span></a></li></ol></li></ol>
+</div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div id="page-content" class="col-lg-8">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            2023/02/05
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            17:54
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Tako Senpai
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="WebAPI：使用-MutationObserver-监听-DOM-变化"><a href="#WebAPI：使用-MutationObserver-监听-DOM-变化" class="headerlink" title="WebAPI：使用 MutationObserver 监听 DOM 变化"></a>WebAPI：使用 MutationObserver 监听 DOM 变化</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在写一个 <strong>TamperMonkey</strong> 脚本的时候遇到了一个小问题：页面上有一些组件的内容是延迟加载的，比如需要通过 AJAX 请求来获取的数据。这时，如果我们的脚本依然选择在<code>window.load</code>时调用，会获取不到想要的 DOM 节点或者数据。</p>
+<p>那么如何在一个 DOM 节点数据更新了之后再调用我们的脚本呢？这时候就要用到 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/MutationObserver">MutationObserver</a> 这个 WebAPI 了。</p>
+<h2 id="什么是-MutationObserver"><a href="#什么是-MutationObserver" class="headerlink" title="什么是 MutationObserver ?"></a>什么是 MutationObserver ?</h2><p>引用一下 MDN 的官方文档描述：</p>
+<blockquote>
+<p>MutationObserver 接口提供了监视对 DOM 树所做更改的能力。它被设计为旧的 Mutation Events 功能的替代品，该功能是 DOM3 Events 规范的一部分。</p>
+</blockquote>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><h3 id="1-创建一个新的-Mutation-监听器"><a href="#1-创建一个新的-Mutation-监听器" class="headerlink" title="1. 创建一个新的 Mutation 监听器"></a>1. 创建一个新的 Mutation 监听器</h3><p>创建一个 <strong>Observer</strong> 对象时，需要传入一个回调函数，在里面可以获取到所有发生了更新的节点，通过遍历这些节点来执行我们想要的操作。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> observer = <span class="keyword">new</span> <span class="title class_">MutationObserver</span>(<span class="function">(<span class="params">mutations</span>) =&gt;</span> &#123;</span><br><span class="line">    mutations.<span class="title function_">forEach</span>(<span class="function">(<span class="params">mutation</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!mutation.<span class="property">addedNodes</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; mutation.<span class="property">addedNodes</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">            <span class="comment">// 这里的node就是发生了改变的Node</span></span><br><span class="line">            <span class="keyword">let</span> node = mutation.<span class="property">addedNodes</span>[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-开始监听"><a href="#2-开始监听" class="headerlink" title="2. 开始监听"></a>2. 开始监听</h3><p>有了 <strong>Observer</strong> 对象之后，我们需要调用 <strong>observe()</strong> 方法。</p>
+<p>第一个参数是观察的对象，一般来说用 <strong>document.body</strong> 即可。当然为了性能考虑，可以根据实际情况来缩小观察的范围。</p>
+<p>第二个参数为选项，详情可以查看<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/MutationObserver/observe">官方文档</a>。</p>
+<p>一般来说，我们要监听的是整个子树的变化，因此<strong>subtree</strong>和<strong>childList</strong>需要选上，前者监听整个子树的所有属性，后者监听子节点的增删变化。</p>
+<p><strong>attributes</strong>可以观察节点属性的变化。</p>
+<p><strong>characterData</strong>可以观察节点上所有字符的变化，这对 <strong>innerText</strong> 的监听非常有用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">observer.<span class="title function_">observe</span>(<span class="variable language_">document</span>.<span class="property">body</span>, &#123;</span><br><span class="line">    <span class="attr">childList</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">subtree</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">attributes</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">characterData</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-结束监听"><a href="#3-结束监听" class="headerlink" title="3. 结束监听"></a>3. 结束监听</h3><p>要结束监听时，只需要调用 <strong>disconnect()</strong> 即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">observer.<span class="title function_">disconnect</span>();</span><br></pre></td></tr></table></figure>
+
+<h2 id="一个栗子-🌰"><a href="#一个栗子-🌰" class="headerlink" title="一个栗子 🌰"></a>一个栗子 🌰</h2><p>回到开始提到的 TamperMonkey 脚本。这个案例起源于我的 Netlify 网站后台的统计数据界面。</p>
+<p>页面上有一个<code>table</code>元素，里面有一些经过了编码的 URL，统计了一些界面的访问量。而我的目标是把这些经过了编码的 URL 转换为未经过编码的 URL，也就是把 URL 中的%XX 转换为中文字符。</p>
+<p>由于<code>table</code>的数据是懒加载的，那么我们使用 MutationObserver 来观察节点的加载情况。当<code>table</code>的内容发生变化时，执行我们的脚本。</p>
+<p>完整代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">convert</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> links = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(</span><br><span class="line">        <span class="string">&quot;#main .layout-masonry tbody tr td:first-child div a&quot;</span></span><br><span class="line">    );</span><br><span class="line">    [].<span class="property">forEach</span>.<span class="title function_">call</span>(links, <span class="function">(<span class="params">link</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> text = link.<span class="property">innerText</span>;</span><br><span class="line">        link.<span class="property">innerHTML</span> = <span class="built_in">decodeURI</span>(text);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">init</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> observer = <span class="keyword">new</span> <span class="title class_">MutationObserver</span>(<span class="function">(<span class="params">mutations</span>) =&gt;</span> &#123;</span><br><span class="line">        mutations.<span class="title function_">forEach</span>(<span class="function">(<span class="params">mutation</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (!mutation.<span class="property">addedNodes</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; mutation.<span class="property">addedNodes</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">                <span class="keyword">let</span> node = mutation.<span class="property">addedNodes</span>[i];</span><br><span class="line">                <span class="keyword">if</span> (node.<span class="property">tagName</span> == <span class="string">&quot;TABLE&quot;</span>) &#123;</span><br><span class="line">                    <span class="title function_">convert</span>();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    observer.<span class="title function_">observe</span>(<span class="variable language_">document</span>.<span class="property">body</span>, &#123;</span><br><span class="line">        <span class="attr">childList</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">subtree</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">attributes</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">characterData</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">window</span>.<span class="property">onload</span> = init;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>可以看到，对于所有变化的节点，我们只关注标签名为<code>TABLE</code>的节点的变化。这里因为要监听<code>innerText</code>，所以我们在选项里加上了<code>characterData</code>。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/MutationObserver">MDN：MutationObserver</a></p>
+<p><a target="_blank" rel="noopener" href="https://shuvohabib.medium.com/listening-to-dom-changes-by-javascript-web-api-mutation-observer-hint-its-the-best-practice-3ee92dc8aac6">封面图片来源</a></p>
+
+</article>
+    
+    
+
+<ul class="trm-post-copyright">
+    <li class="trm-post-copyright-author">
+        <strong>本文作者：</strong>
+        Tako Senpai
+    </li>
+    <li class="trm-post-copyright-link">
+        <strong>本文链接：</strong>
+        <a id="original-link" href="http://takosenpai2687.github.io/2023/02/05/WebAPI：使用-MutationObserver-监听-DOM-变化/" title="WebAPI：使用 MutationObserver 监听 DOM 变化 🩺">http://takosenpai2687.github.io/2023/02/05/WebAPI：使用-MutationObserver-监听-DOM-变化/</a>
+    </li>
+    <li class="trm-post-copyright-license">
+        <strong>版权声明：</strong>
+        本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 ">CC BY-NC-SA 4.0</a> 许可协议。
+    </li>
+</ul>
+
+
+</div>
+<div id="post-next-prev" class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/02/07/CSS%E4%BF%AE%E7%82%BC%E6%97%A5%E8%AE%B0%EF%BC%9A%E6%8F%90%E7%93%A6%E7%89%B9%E7%9A%84%E6%98%9F%E7%A9%BA/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/static/TeyvatStars/step-4.png">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%89%8D%E7%AB%AF/">
+                    前端
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/02/07/CSS%E4%BF%AE%E7%82%BC%E6%97%A5%E8%AE%B0%EF%BC%9A%E6%8F%90%E7%93%A6%E7%89%B9%E7%9A%84%E6%98%9F%E7%A9%BA/" class="trm-anima-link">
+                    CSS 修炼日记：提瓦特的星空 ⭐
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>2023/02/07</li>
+                <li>19:01</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/01/27/Mixed%20Content%EF%BC%9A%E6%B7%B7%E5%90%88%E5%86%85%E5%AE%B9%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/static/MixedContent/mixed-content.png">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%89%8D%E7%AB%AF/">
+                    前端
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/01/27/Mixed%20Content%EF%BC%9A%E6%B7%B7%E5%90%88%E5%86%85%E5%AE%B9%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="trm-anima-link">
+                    Mixed Content：混合内容的解决方案 🍸
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>2023/01/27</li>
+                <li>16:11</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v7.2.0
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                主题 - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v2.0.9
+            </span>
+        </div>
+      
+
+     
+
+     
+</footer>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="单栏和双栏切换" onclick="asyncFun.switchSingleColumn()">
+            <i class="iconfont fas fa-arrows-alt-h"></i>
+        </div>
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  
+  <!-- Plugin -->
+
+
+
+
+    
+    
+<script src="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.0.9"></script>
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.0.9"></script>
+
+</body>
+
+</html>

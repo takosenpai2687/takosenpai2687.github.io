@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="CSS 修炼日记：提瓦特的星空 ⭐前言大家好，我是练习时长两年半的前端练习生 Tako。最近在上网冲浪 🏄 的时候，无意间发现了一位大佬做的 圣遗物强化模拟器，其中强化界面的星空背景非常有趣。恰好最近我也在研究制作 TakoTako 原神圣遗物的模块，遂萌生了学习一下的想法。 下图为 TakoTako 中制作完成后的效果：  在原版的基础上做了改进，增加了星空颜色变化的效果（gif 已加速）：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS 修炼日记：提瓦特的星空 ⭐">
+<meta property="og:url" content="http://takosenpai2687.github.io/2023/02/07/CSS%E4%BF%AE%E7%82%BC%E6%97%A5%E8%AE%B0%EF%BC%9A%E6%8F%90%E7%93%A6%E7%89%B9%E7%9A%84%E6%98%9F%E7%A9%BA/index.html">
+<meta property="og:site_name" content="Tako Bay">
+<meta property="og:description" content="CSS 修炼日记：提瓦特的星空 ⭐前言大家好，我是练习时长两年半的前端练习生 Tako。最近在上网冲浪 🏄 的时候，无意间发现了一位大佬做的 圣遗物强化模拟器，其中强化界面的星空背景非常有趣。恰好最近我也在研究制作 TakoTako 原神圣遗物的模块，遂萌生了学习一下的想法。 下图为 TakoTako 中制作完成后的效果：  在原版的基础上做了改进，增加了星空颜色变化的效果（gif 已加速）：">
+<meta property="og:locale">
+<meta property="og:image" content="http://takosenpai2687.github.io/img/404.jpg">
+<meta property="og:image" content="http://takosenpai2687.github.io/img/404.jpg">
+<meta property="og:image" content="http://takosenpai2687.github.io/img/404.jpg">
+<meta property="og:image" content="http://takosenpai2687.github.io/img/404.jpg">
+<meta property="og:image" content="http://takosenpai2687.github.io/img/404.jpg">
+<meta property="og:image" content="http://takosenpai2687.github.io/img/404.jpg">
+<meta property="og:image" content="http://takosenpai2687.github.io/img/404.jpg">
+<meta property="og:image" content="http://takosenpai2687.github.io/img/404.jpg">
+<meta property="article:published_time" content="2023-02-07T11:01:23.000Z">
+<meta property="article:modified_time" content="2025-08-19T01:37:11.008Z">
+<meta property="article:author" content="Tako Senpai">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://takosenpai2687.github.io/img/404.jpg">
+
+
+<title >CSS 修炼日记：提瓦特的星空 ⭐</title>
+
+<!-- Favicon -->
+
+    <link href='/img/tako.png?v=1?v=2.0.9' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/tako.png?v=1?v=2.0.9' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"takosenpai2687.github.io","author":"Tako Senpai","root":"/","typed_text":["&& Web Developer"],"theme_version":"2.0.9","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/logo-black.png","icon16":"/img/tako.png?v=1","icon32":"/img/tako.png?v=1","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/img/tako.png?v=1","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":200}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2025-08-19 09:37:11"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.9" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+
+     
+
+    
+        <!-- Google Analytics -->
+        <script async src='https://www.googletagmanager.com/gtag/js?id=G-RQ3ECBBKBP'></script>
+        <script defer>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-RQ3ECBBKBP');
+        </script>
+    
+
+    
+ 
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/img/logo-black.png">
+    
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    主页
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    归档
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/categories/" target="">
+                    分类
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/tags/" target="">
+                    标签
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/links/" target="">
+                    友链
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/sky.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            CSS 修炼日记：提瓦特的星空 ⭐
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2023
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div id="page-sidebar" class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    
+
+<div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
+        <div class="trm-user-tabs" id="sidebar-tabs">
+           <div class="trm-tabs-nav trm-mb-40" id="trm-tabs-nav">
+                <div data-to="tabs-user" class="trm-tabs-nav-item">
+                    <i class="iconfont fas fa-user-alt"></i>
+                </div>
+                <div data-to="tabs-toc" class="trm-tabs-nav-item active">
+                    <i class="iconfont fas fa-th-list"></i>
+                </div>
+           </div>
+            <div name="tabs-user" class="trm-tabs-item">
+                <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/avatar.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        Tako Senpai
+    </h5>
+    
+        <div class="trm-label">
+            Student
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+                <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com/takosenpai2687" title="github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="/" title="takotako" rel="nofollow" target="_blank">
+            <i class="iconfont 🐙"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+                <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                📍:
+            </div>
+            <div class="trm-label trm-label-light">
+                Sydney
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                🎂:
+            </div>
+            <div class="trm-label trm-label-light">
+                June 3
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                🌐:
+            </div>
+            <div class="trm-label trm-label-light">
+                中文, English
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                🏫(UG):
+            </div>
+            <div class="trm-label trm-label-light">
+                UNSW
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                🏫(PG):
+            </div>
+            <div class="trm-label trm-label-light">
+                USyd
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+                
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:takosenpai2687@gmail.com" class="trm-btn">
+            联系我
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+            </div>
+            <div name="tabs-toc" class="trm-tabs-item active">
+                <div class="post-toc">
+    <ol class="toc"><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#CSS-修炼日记：提瓦特的星空-⭐"  data-scroll-to="#CSS-修炼日记：提瓦特的星空-⭐"><span class="toc-number">1.</span> <span class="toc-text">CSS 修炼日记：提瓦特的星空 ⭐</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#前言"  data-scroll-to="#前言"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#开始：组件结构"  data-scroll-to="#开始：组件结构"><span class="toc-number">1.2.</span> <span class="toc-text">开始：组件结构</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#CSS：星空颜色背景-🌃"  data-scroll-to="#CSS：星空颜色背景-🌃"><span class="toc-number">1.3.</span> <span class="toc-text">CSS：星空颜色背景 🌃</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#CSS：地平线-🌅"  data-scroll-to="#CSS：地平线-🌅"><span class="toc-number">1.4.</span> <span class="toc-text">CSS：地平线 🌅</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#CSS：雾气效果-☁️"  data-scroll-to="#CSS：雾气效果-☁️"><span class="toc-number">1.5.</span> <span class="toc-text">CSS：雾气效果 ☁️</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#CSS：加点星星-⭐"  data-scroll-to="#CSS：加点星星-⭐"><span class="toc-number">1.6.</span> <span class="toc-text">CSS：加点星星 ⭐!</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#结语"  data-scroll-to="#结语"><span class="toc-number">1.7.</span> <span class="toc-text">结语</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#参考"  data-scroll-to="#参考"><span class="toc-number">1.8.</span> <span class="toc-text">参考</span></a></li></ol></li></ol>
+</div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div id="page-content" class="col-lg-8">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            2023/02/07
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            19:01
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Tako Senpai
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="CSS-修炼日记：提瓦特的星空-⭐"><a href="#CSS-修炼日记：提瓦特的星空-⭐" class="headerlink" title="CSS 修炼日记：提瓦特的星空 ⭐"></a>CSS 修炼日记：提瓦特的星空 ⭐</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>大家好，我是练习时长两年半的前端练习生 Tako。最近在上网冲浪 🏄 的时候，无意间发现了一位大佬做的 <a target="_blank" rel="noopener" href="https://github.com/DioMao/genshin_ArtifactsUpgradeSim_vue">圣遗物强化模拟器</a>，其中强化界面的星空背景非常有趣。恰好最近我也在研究制作 <a target="_blank" rel="noopener" href="https://tako-tako.netlify.app/genshin">TakoTako</a> 原神圣遗物的模块，遂萌生了学习一下的想法。</p>
+<p>下图为 <a target="_blank" rel="noopener" href="https://tako-tako.netlify.app/genshin">TakoTako</a> 中制作完成后的效果：</p>
+<p><img src="/static/TeyvatStars/tako-stars.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>在原版的基础上做了改进，增加了星空颜色变化的效果（gif 已加速）：</p>
+<p><img src="/static/TeyvatStars/stars-move.gif" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h2 id="开始：组件结构"><a href="#开始：组件结构" class="headerlink" title="开始：组件结构"></a>开始：组件结构</h2><p>首先写一下 HTML 结构。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;stars-container stars-bg&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;stars-box&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;stars&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;stars2&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;stars3&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;fog&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;horizon&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们用一个<code>div.stars-container</code>包裹所有的子组件。这个星空组件由三个部分组成：</p>
+<ul>
+<li>stars-box：包含 3 组星星，每组星星的密度，位置，速度各不相同，以达到 3D 的效果。<ul>
+<li>stars</li>
+<li>stars2</li>
+<li>stars3</li>
+</ul>
+</li>
+<li>fog：雾气效果，由一个雾气材质贴图提供。</li>
+<li>horizon：发光的地平线效果，由 linear-gradient 渐变实现。</li>
+</ul>
+<h2 id="CSS：星空颜色背景-🌃"><a href="#CSS：星空颜色背景-🌃" class="headerlink" title="CSS：星空颜色背景 🌃"></a>CSS：星空颜色背景 🌃</h2><p>CSS 部分，首先我们来实现一下最简单的星空颜色背景。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.stars-container</span> &#123;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(<span class="number">180deg</span>, <span class="number">#703519</span>, <span class="number">#7d5326</span>);</span><br><span class="line">    <span class="attribute">animation</span>: stars-bg-change <span class="number">12s</span> linear infinite;</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">div</span> &#123;</span><br><span class="line">        <span class="attribute">position</span>: absolute;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在动画中使用 <code>hue-rotate()</code> 给它加上颜色的变换，一个周期转 360 度。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@keyframes</span> stars-bg-change &#123;</span><br><span class="line">    <span class="number">0%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">hue-rotate</span>(<span class="number">0deg</span>) <span class="built_in">brightness</span>(<span class="number">0.8</span>);</span><br><span class="line">        -webkit-<span class="attribute">filter</span>: <span class="built_in">hue-rotate</span>(<span class="number">0deg</span>) <span class="built_in">brightness</span>(<span class="number">0.8</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">50%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">hue-rotate</span>(<span class="number">180deg</span>) <span class="built_in">brightness</span>(<span class="number">0.8</span>);</span><br><span class="line">        -webkit-<span class="attribute">filter</span>: <span class="built_in">hue-rotate</span>(<span class="number">180deg</span>) <span class="built_in">brightness</span>(<span class="number">0.8</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">50%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">hue-rotate</span>(<span class="number">360deg</span>) <span class="built_in">brightness</span>(<span class="number">0.8</span>);</span><br><span class="line">        -webkit-<span class="attribute">filter</span>: <span class="built_in">hue-rotate</span>(<span class="number">360deg</span>) <span class="built_in">brightness</span>(<span class="number">0.8</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>到这一步的效果如图：</p>
+<p><img src="/static/TeyvatStars/step-1.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h2 id="CSS：地平线-🌅"><a href="#CSS：地平线-🌅" class="headerlink" title="CSS：地平线 🌅"></a>CSS：地平线 🌅</h2><p>地平线实际上就是一个半透明的纵向渐变（自下而上）。中间为比较醒目的白色，两边为纯透明。给它一个相对较矮的高度（30%），放置在靠下方的位置。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.horizon</span> &#123;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(</span><br><span class="line">        <span class="number">0</span>,</span><br><span class="line">        <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>),</span><br><span class="line">        <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.6</span>),</span><br><span class="line">        <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">    );</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0.3</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">30%</span> <span class="meta">!important</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">bottom</span>: <span class="number">5rem</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>到这一步的效果如图：</p>
+<p><img src="/static/TeyvatStars/step-2.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h2 id="CSS：雾气效果-☁️"><a href="#CSS：雾气效果-☁️" class="headerlink" title="CSS：雾气效果 ☁️"></a>CSS：雾气效果 ☁️</h2><p>雾气效果需要使用下面的材质贴图：</p>
+<p><img src="/static/TeyvatStars/fog.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>对 <code>div.fog</code> 套用这个背景图片，给它一个差不多的宽高，并且 <code>repeat</code>。</p>
+<p>CSS 代码如下：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.fog</span> &#123;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">url</span>(fog.png);</span><br><span class="line">    <span class="attribute">background-size</span>: <span class="number">150rem</span> <span class="number">60rem</span>;</span><br><span class="line">    <span class="attribute">animation</span>: fog-move <span class="number">50s</span> linear infinite;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0.8</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再加个动画让它动起来 🏃：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@keyframes</span> fog-move &#123;</span><br><span class="line">    <span class="number">0%</span> &#123;</span><br><span class="line">        <span class="attribute">background-position</span>-x: <span class="number">150rem</span>;</span><br><span class="line">        <span class="attribute">background-position</span>-y: <span class="number">60rem</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">100%</span> &#123;</span><br><span class="line">        <span class="attribute">background-position</span>-x: <span class="number">0</span>;</span><br><span class="line">        <span class="attribute">background-position</span>-y: <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>到这一步的效果如图：</p>
+<p><img src="/static/TeyvatStars/step-3.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h2 id="CSS：加点星星-⭐"><a href="#CSS：加点星星-⭐" class="headerlink" title="CSS：加点星星 ⭐!"></a>CSS：加点星星 ⭐!</h2><p>星星的原理其实很简单：给三个盒子各随机生成一堆白色的 <code>box-shadow</code> 属性，再给每个盒子一个不同速度、不同相位的动画，来模拟斗转星移的效果。<code>box-shadow</code>的代码实在太多，下面只展示前几行和其他关键的 CSS 属性（大佬好像也是借鉴的别人的，但实在找不到原作者了 o(╥﹏╥)o）。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#stars</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">0.0625rem</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">0.0625rem</span>;</span><br><span class="line">    <span class="attribute">background</span>: transparent;</span><br><span class="line">    <span class="attribute">animation</span>: animStar <span class="number">50s</span> linear infinite</span><br><span class="line">    box-shadow: <span class="number">87.9375rem</span> <span class="number">31.9375rem</span> <span class="number">#fff</span>, <span class="number">100.6875rem</span> <span class="number">7.4375rem</span> <span class="number">#fff</span>,</span><br><span class="line">        <span class="number">105.375rem</span> <span class="number">59.75rem</span> <span class="number">#fff</span>, <span class="number">72.6875rem</span> <span class="number">120.5625rem</span> <span class="number">#fff</span>,</span><br><span class="line">        <span class="number">57rem</span> <span class="number">77.625rem</span> <span class="number">#fff</span>, <span class="number">30.625rem</span> <span class="number">29.3125rem</span> <span class="number">#fff</span>,</span><br><span class="line">        <span class="number">54.3125rem</span> <span class="number">26.5625rem</span> <span class="number">#fff</span>, <span class="number">90.4375rem</span> <span class="number">55.6875rem</span> <span class="number">#fff</span>,</span><br><span class="line">        <span class="number">26.375rem</span> <span class="number">122.5rem</span> <span class="number">#fff</span>, <span class="number">32.3125rem</span> <span class="number">124.6875rem</span> <span class="number">#fff</span>,</span><br><span class="line">        <span class="number">46.125rem</span> <span class="number">10.6875rem</span> <span class="number">#fff</span>, <span class="number">83rem</span> <span class="number">104.25rem</span> <span class="number">#fff</span>,</span><br><span class="line">        // 以下省略 <span class="number">1000</span> 行。。。</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这部分完整 CSS 代码请参考：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/takosenpai2687/takosenpai2687.github.io/blob/master/source/static/TeyvatStars/stars.css">https://github.com/takosenpai2687/takosenpai2687.github.io/blob/master/source/static/TeyvatStars/stars.css</a></p>
+<p>接下来让星星 ⭐ 动起来：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@keyframes</span> animStar &#123;</span><br><span class="line">  from &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateX</span>(<span class="number">40rem</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  to &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateX</span>(<span class="number">125rem</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>到这一步的效果如图：</p>
+<p><img src="/static/TeyvatStars/step-4.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><blockquote>
+<p>谁说提瓦特的星空是虚假的，我派蒙第一个不服！</p>
+</blockquote>
+<p>下一期将带来派蒙和她的五个玩具。提前预告一下效果图：</p>
+<p><img src="/static/TeyvatStars/paimon.gif" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://github.com/takosenpai2687/takosenpai2687.github.io/blob/master/source/static/TeyvatStars/index.html">本文完整代码</a></p>
+<p><a target="_blank" rel="noopener" href="https://tako-tako.netlify.app/genshin">TakoTako 原神页</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/DioMao/genshin_ArtifactsUpgradeSim_vue">原神圣遗物模拟器（作者：DioMao）</a></p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/shuangcs/pen/gKbQEj">CSS 星星效果（作者：csshuang）</a></p>
+
+</article>
+    
+    
+
+<ul class="trm-post-copyright">
+    <li class="trm-post-copyright-author">
+        <strong>本文作者：</strong>
+        Tako Senpai
+    </li>
+    <li class="trm-post-copyright-link">
+        <strong>本文链接：</strong>
+        <a id="original-link" href="http://takosenpai2687.github.io/2023/02/07/CSS修炼日记：提瓦特的星空/" title="CSS 修炼日记：提瓦特的星空 ⭐">http://takosenpai2687.github.io/2023/02/07/CSS修炼日记：提瓦特的星空/</a>
+    </li>
+    <li class="trm-post-copyright-license">
+        <strong>版权声明：</strong>
+        本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 ">CC BY-NC-SA 4.0</a> 许可协议。
+    </li>
+</ul>
+
+
+</div>
+<div id="post-next-prev" class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/02/10/Base64%E5%9B%BE%E7%89%87%E7%9A%84%E7%BC%96%E8%A7%A3%E7%A0%81/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/static/Base64/cover.webp">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%89%8D%E7%AB%AF/">
+                    前端
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/02/10/Base64%E5%9B%BE%E7%89%87%E7%9A%84%E7%BC%96%E8%A7%A3%E7%A0%81/" class="trm-anima-link">
+                    Base64 图片的编解码 🖼️
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>2023/02/10</li>
+                <li>17:49</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/02/05/WebAPI%EF%BC%9A%E4%BD%BF%E7%94%A8-MutationObserver-%E7%9B%91%E5%90%AC-DOM-%E5%8F%98%E5%8C%96/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/static/MutationObserver/cover.png">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E5%89%8D%E7%AB%AF/">
+                    前端
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/02/05/WebAPI%EF%BC%9A%E4%BD%BF%E7%94%A8-MutationObserver-%E7%9B%91%E5%90%AC-DOM-%E5%8F%98%E5%8C%96/" class="trm-anima-link">
+                    WebAPI：使用 MutationObserver 监听 DOM 变化 🩺
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>2023/02/05</li>
+                <li>17:54</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v7.2.0
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                主题 - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v2.0.9
+            </span>
+        </div>
+      
+
+     
+
+     
+</footer>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="单栏和双栏切换" onclick="asyncFun.switchSingleColumn()">
+            <i class="iconfont fas fa-arrows-alt-h"></i>
+        </div>
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  
+  <!-- Plugin -->
+
+
+
+
+    
+    
+<script src="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.0.9"></script>
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.0.9"></script>
+
+</body>
+
+</html>
