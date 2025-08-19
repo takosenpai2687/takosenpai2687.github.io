@@ -76,6 +76,32 @@ Next.js 默认支持服务端渲染（SSR）。在 SSR 场景下，`dangerouslyS
 
 ## 样式隔离解决方案
 
+### 添加类名
+
+在实际项目中，我们常常会将 HTML 内容存储在 CMS（内容管理系统）中，然后通过 `dangerouslySetInnerHTML` 渲染到页面。此时，为了避免样式污染，可以采用如下方式：
+
+1. **为嵌入的 HTML 添加唯一的容器类名**，如 `cms-content`：
+
+   ```html
+   <!-- CMS 存储的 HTML 内容 -->
+   <style>
+     .cms-content h1 {
+       color: #0070f3;
+     }
+     .cms-content p {
+       font-size: 16px;
+     }
+   </style>
+   <div class="cms-content">
+     <h1>标题</h1>
+     <p>正文内容</p>
+   </div>
+   ```
+
+2. **所有 style 标签中的样式都加上该类名作为选择器前缀**，确保样式只作用于容器内部。
+
+只要这个类名足够独特（如 `cms-content`），就不会影响页面中其他元素。建议在 CMS 编辑器中约定样式书写规范，或在渲染前自动为 style 内容加前缀。
+
 ### 使用 CSS Modules
 
 CSS Modules 是一种将 CSS 样式模块化的方法，在 Next.js 中可以很方便地使用。通过 CSS Modules，每个 CSS 文件都被视为一个模块，其中定义的类名在该模块内是唯一的，不会与其他模块冲突。
